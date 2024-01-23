@@ -13,21 +13,31 @@ export default function Footer(){
                 <FaWhatsapp/>
             </span>
             <div className="flex">
-                <section>
-                    <p>Informações</p>
+                <section className="flex flex-col">
+                    <h5>Informações</h5>
                     <button>Sobre o E-Rede Store</button>
                     <button>Segurança</button>
                     <button>Lista de desejos</button>
                     <button>Trabalhe Conosco</button>
                 </section>
-                <section>
-                    <p>Informações</p>
+                <section className="flex flex-col">
+                    <h5>Informações</h5>
                     <button>Tênis</button>
                     <button>Camiseta</button>
                     <button>Acessório</button>
                     <button>Esportivo</button>
                 </section>
+
             </div>
+            <div>
+                <h5>Localização</h5>
+                <p>Rua Martinho Rodrigues, 331</p>
+                <p>Bairro de Fátima, Fortaleza-CE</p>
+
+            </div>
+            <footer className="">
+                <p>2023 Irede</p>
+            </footer>
         </section>
     )
 }

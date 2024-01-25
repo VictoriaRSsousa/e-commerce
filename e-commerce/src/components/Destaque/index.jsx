@@ -1,7 +1,7 @@
 export default function Destaque(){
     return(
         <>
-        <main className="shadow-md">
+        <main className="shadow-md rounded">
         <section>
             <img src="../src/assets/images/shoes.png" alt="" className="w-full" />
         </section>

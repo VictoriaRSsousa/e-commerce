@@ -5,7 +5,7 @@ export default function Footer(){
         <>
         <section className="hidden md:flex bg-azul-escuro text-white text-xs font-Inter flex-col ">
             <main className="flex mt-12">
-                <section className="flex flex-col ml-52 w-1/5">
+                <section className="flex flex-col mx-20 w-1/5">
                     <span className="flex gap-7  font-normal	">
                         <img src="../src/assets/images/logo.png" alt=""  className="h-8 w-20"/>
                         <p className="">Lorem ipsum lorem ipsum lorem lorem  ipsum lorem loram lorem lorem lorem ipsum ipsum ipsum  </p>

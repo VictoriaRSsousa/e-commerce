@@ -5,6 +5,8 @@ import Login from "./pages/Login"
 import Cadastro from "./pages/Cadastro"
 import Cart from "./pages/Cart"
 import Pedidos from "./pages/Pedidos"
+import Produtos from "./pages/Produtos"
+import Categorias from "./pages/Categorias"
 // import Produtos from "./pages/Produtos"
 // import Categorias from "./pages/Categorias"
 function App() {
@@ -17,8 +19,10 @@ function App() {
         <Route path="/cadastro/*" element={<Cadastro/>}/>
         <Route path="/cart/*" element={<Cart/>}/>
         <Route path="/pedidos/*" element={<Pedidos/>}/>
-        {/* <Route path="/produtos" element={<Produtos/>}/>
-        <Route path="/categorias" element={<Categorias/>}/> */}
+        <Route path="/produtos/*" element={<Produtos/>}/>
+        <Route path="/categorias/*" element={<Categorias/>}/>
+        <Route path="*" element={<div>Pagina nao encontrada</div>}/>
+ 
       </Routes>
     </BrowserRouter>
   )

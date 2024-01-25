@@ -9,7 +9,7 @@ export default function CardPedido(){
                 <p className="font-semibold text-sm text-black md:text-laranja">R$ 200,00</p>
             </section>
         </div>
-        <footer className="flex-col md:flex">
+        <footer className="flex flex-col md:flex-row ">
             <p>Status</p>
             <p className="flex ">Finalizado</p>
 

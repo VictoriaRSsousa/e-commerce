@@ -7,8 +7,8 @@ export default function Pedidos(){
     return(
         <main>
             <Header/>
-            <div className="flex flex-col md:flex ">          
-                <section className="">
+            <div className=" flex flex-col md:flex-row">          
+                <section className="hidden md:flex-col flex">
                     <a href="" className="focus:text-laranja"> Meus Pedidos</a>
                     <a href="" className="focus:text-laranja">Minhas Informações</a>
                 </section>
@@ -25,7 +25,7 @@ export default function Pedidos(){
 
                 </section>
             </div>
-            <Footer classname="mb-0"/>
+            <Footer classname=""/>
         </main>
     )
 }

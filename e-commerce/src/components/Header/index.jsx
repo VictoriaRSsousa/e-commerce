@@ -2,13 +2,19 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoMdSearch } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Cadastro from "../../pages/Cadastro"
+import { Link, useLocation } from "react-router-dom";
 
 
 export default function Header(){
+    const loc = useLocation()
+    const routeHome = loc.pathname==="/"
+    console.log(loc.pathname)
+    console.log(routeHome)
+
     return(
         
         <>
-        <section className="hidden md:flex">
+        <section className="hidden md:flex mt-0">
         <div className="bg-[#1E3A8A] w-full ">
             <main className="flex justify-around items-center h-36">
                 <img src="../src/assets/images/logo.png" alt="logo e-rede" className="h-8 w-20"/>  
@@ -17,19 +23,21 @@ export default function Header(){
                     <input type="text " placeholder="         Buscar" className="flex h-10 text-Inter font-normal text-stone-500 w-[520px]"/>
                 </label>
                 <article className="flex text-[white] fonr-semibold gap-5 items-center">
-
-                    <button className="">Cadastre-se</button>
+                    <Link to="/cadastro">
+                    <a className="">Cadastre-se</a></Link>
                     
+                    <Link to="/login">
                     <button className="bg-laranja rounded-lg w-28 h-10">Entrar</button>
+                    </Link>
                     <MdOutlineShoppingCart className="w-6 h-6"/>
                 </article>
             </main>
             <footer>
                 <nav className="text-[white] flex justify-center gap-10 font-semibold text-base">
-                    <button className="focus:text-[#EA580C]" >Home</button>
-                    <button className="focus:text-[#EA580C]">Produtos</button>
-                    <button className="focus:text-[#EA580C]">Categorias</button>
-                    <button className="focus:text-[#EA580C]">Meus Pedidos</button>
+                    <Link className={`${loc.pathname==="/"?"text-laranja":"text-white"} `} to="/"> Home</Link>
+                    <Link className={`${loc.pathname==="/produtos"?"text-laranja":"text-white"} `} to="/produtos">Produtos</Link>
+                    <Link className={`${loc.pathname==="/categorias"?"text-laranja":"text-white"} `} to="/categorias">Categorias</Link>
+                    <Link className={`${loc.pathname==="/pedidos"?"text-laranja":"text-white"} `} to="/pedidos">Meus Pedidos</Link>
                 </nav>
             </footer>
         </div>

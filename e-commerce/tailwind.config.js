@@ -11,7 +11,8 @@ export default {
       colors:{
         'azul-escuro':'#1E3A8A',
         'laranja':'#EA580C',
-        'cinza-escuro':'#78716C'
+        'cinza-escuro':'#78716C',
+        'cinza-medio':'#666666'
 
       },
       fontFamily:{

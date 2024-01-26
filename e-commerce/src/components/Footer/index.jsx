@@ -3,7 +3,7 @@ import { FaFacebook, FaInstagram,FaWhatsapp } from "react-icons/fa";
 export default function Footer(){
     return(
         <>
-        <section className="hidden md:flex bg-azul-escuro text-white text-xs font-Inter flex-col mb-0">
+        <section className="hidden md:flex bg-azul-escuro text-white text-xs font-Inter flex-col  inset-x-0 bottom-0">
             <main className="flex mt-12">
                 <section className="flex flex-col mx-20 w-1/5">
                     <span className="flex gap-7  font-normal	">

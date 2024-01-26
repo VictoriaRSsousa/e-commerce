@@ -5,14 +5,17 @@ import Header from "../../components/Header";
 
 export default function Pedidos(){
     return(
-        <main className="">
-            <Header/>
-            <div className=" flex flex-col md:flex-row md:my-20 md:mx-20 ">          
-                <section className="hidden  md:flex flex-col bg-slate-100">
+        <>
+        <Header/>
+        
+        <main className="">          
+            <div className=" flex flex-col md:flex-row  md:my-20 md:mx-20  justify-center md:justify-normal">          
+                <section className="hidden  md:flex flex-col bg-slate-100 rounded-lg py-8 h-32 ">
                     <a href="" className="focus:text-laranja"> Meus Pedidos</a>
+                    <div className="border-t border-stone-500"></div>
                     <a href="" className="focus:text-laranja">Minhas Informações</a>
                 </section>
-                <section className="flex flex-col  bg-slate-100  md:mx-10 py-8  w-3/5 md:p-10">
+                <section className="flex flex-col  bg-slate-100   md:mx-10 py-8  w-3/5 md:p-10 rounded-lg   ">
                     <div className="flex justify-between">
                         <h2 className="text-black md:text-stone-500 text-base font-semibold ">Meus Pedidos</h2>
                         <span className="flex">
@@ -21,14 +24,15 @@ export default function Pedidos(){
                         </span>
                     </div>
                     
-                    <div className="">
+                    <div className="">                      
                         <CardPedido/>
                         <CardPedido/>
                     </div>
 
                 </section>
-            </div>
-            <Footer classname=" "/>
+            </div>           
         </main>
+        <Footer classname=" "/>
+        </>
     )
 }

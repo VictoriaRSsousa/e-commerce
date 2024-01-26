@@ -5,7 +5,10 @@ export default function Produtos(){
     return(
         <>
         <Header/>
-        <h1>PRODUTOS</h1>
+        <main className="min-h-screen flex justify-center">
+            <h1>PRODUTOS</h1>
+        </main>
+        
         <Footer/>
         </>
     )

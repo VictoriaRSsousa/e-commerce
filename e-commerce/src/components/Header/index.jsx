@@ -43,8 +43,23 @@ export default function Header(){
         </div>
         </section>
         <section className="bg-[#1E3A8A] flex flex-col h-36 p-8 gap-3 md:hidden" >
-            <header className="flex text-[white] justify-around ">
-                <GiHamburgerMenu className="h-6 w-7"/>
+            <header className="flex text-[white] justify-around "> 
+            <button className="peer">
+            <GiHamburgerMenu className="h-6 w-7"/>
+            </button>
+                <aside className="h-screen w-screen bg-slate-100 fixed peer-focus:left-0 top-0 z-50	 left-[100vw] ">
+                    <h2 className="text-black">Páginas</h2>
+                    <nav className="text-black flex flex-col">
+                        
+                        <Link to="/"> Home</Link>
+                        <Link to="/produtos">Produtos</Link>
+                        <Link to="/categorias">Categorias</Link>
+                        <Link to="/pedidos"><button className="focus:text-laranja bg-slate-100">Meus Pedidos</button></Link>
+                        
+                    </nav>
+                   
+                </aside>
+
                 <img src="../src/assets/images/logo.png" alt="logo e-rede" className="h-7 w-[72px]"/>
                 <MdOutlineShoppingCart className="h-6 w-6"/>
             </header>

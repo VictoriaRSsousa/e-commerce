@@ -11,6 +11,7 @@ import Categorias from "./pages/Categorias"
 // import Categorias from "./pages/Categorias"
 function App() {
 
+
   return (
     <BrowserRouter>
       <Routes>

@@ -9,7 +9,7 @@ export default function Destaque(props){
             <p className="text-[#1E3A8A] text-Inter font-bold">{props.sapato.modelo}</p>
             <p className="text-[#DDDDDD] font-medium	 ">{props.sapato.tipo}</p>
             <p className="text-[#EA580C] font-semibold">{props.sapato.valor}</p>
-            <button className="bg-[#1E3A8A] text-white px-3 rounded-md	font-medium	 ">Comprar</button>
+            <button className="bg-[#1E3A8A] text-white px-3 rounded-md	font-medium	flex items-end justify-end ">Comprar</button>
         </section>
         </main>
         </>

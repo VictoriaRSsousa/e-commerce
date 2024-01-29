@@ -1,7 +1,6 @@
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoMdSearch } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
-import Cadastro from "../../pages/Cadastro"
 import { Link, useLocation } from "react-router-dom";
 
 
@@ -47,16 +46,26 @@ export default function Header(){
             <button className="peer">
             <GiHamburgerMenu className="h-6 w-7"/>
             </button>
-                <aside className="h-screen w-screen bg-slate-100 fixed peer-focus:left-0 top-0 z-50	 left-[100vw] ">
+                <aside className="h-96 w-64 p-8 bg-zinc-50 fixed peer-focus:left-0 top-0 z-50	 left-[100vw] font-semibold rounded-r-lg">
                     <h2 className="text-black">Páginas</h2>
                     <nav className="text-black flex flex-col">
+                    <div className="border border-black"></div>
                         
-                        <Link to="/"> Home</Link>
-                        <Link to="/produtos">Produtos</Link>
-                        <Link to="/categorias">Categorias</Link>
-                        <Link to="/pedidos"><button className="focus:text-laranja bg-slate-100">Meus Pedidos</button></Link>
-                        
+                    <Link className={`${loc.pathname==="/"?"bg-slate-100 text-laranja":"text-stone-500"} h-10 items-center rounded-lg p-3`} to="/"> Home</Link>
+                    <Link className={`${loc.pathname==="/produtos"?"bg-slate-100 text-laranja":"text-stone-500"} h-10 items-center p-3`} to="/produtos">Produtos</Link>
+                    <Link className={`${loc.pathname==="/categorias"?"bg-slate-100 text-laranja":"text-stone-500"} h-10 items-center p-3`} to="/categorias">Categorias</Link>
+                    <Link className={`${loc.pathname==="/pedidos"?"bg-slate-100 text-laranja":"text-stone-500"} h-10 items-center p-3`} to="/pedidos">Meus Pedidos</Link>
                     </nav>
+                    <footer className="flex flex-col mt-20">
+                        <div className="border border-black w-full"></div>
+                        <div className="my-3 flex justify-around items-center">
+                            <Link to="/cadastro/" className="text-stone-500 text-xs">Cadastre-se</Link>
+                            <button className="text-white bg-azul-escuro w-24 h-7 rounded-lg font-medium"> 
+                                <Link to="/login" >Login</Link>
+                            </button>
+                        </div>
+                        
+                    </footer>
                    
                 </aside>
 

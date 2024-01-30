@@ -28,7 +28,10 @@ export default function Header(){
                     <Link to="/login">
                     <button className="bg-laranja rounded-lg w-28 h-10">Entrar</button>
                     </Link>
+                    <Link to="/cart">
                     <MdOutlineShoppingCart className="w-6 h-6"/>
+                    <p className="absolute top-12 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">9</p>
+                    </Link>
                 </article>
             </main>
             <footer>
@@ -46,15 +49,14 @@ export default function Header(){
             <button className="peer">
             <GiHamburgerMenu className="h-6 w-7"/>
             </button>
-                <aside className="h-96 w-64 p-8 bg-zinc-50 fixed peer-focus:left-0 top-0 z-50	 left-[100vw] font-semibold rounded-r-lg">
+                <div className="h-96 w-64 p-8 bg-zinc-50 fixed peer-focus:left-0 top-0 z-50	 left-[-100vw] font-semibold rounded-r-lg -top-0 duration-200 out-in-ease">
                     <h2 className="text-black">Páginas</h2>
-                    <nav className="text-black flex flex-col">
-                    <div className="border border-black"></div>
-                        
-                    <Link className={`${loc.pathname==="/"?"bg-slate-100 text-laranja":"text-stone-500"} h-10 items-center rounded-lg p-3`} to="/"> Home</Link>
-                    <Link className={`${loc.pathname==="/produtos"?"bg-slate-100 text-laranja":"text-stone-500"} h-10 items-center p-3`} to="/produtos">Produtos</Link>
-                    <Link className={`${loc.pathname==="/categorias"?"bg-slate-100 text-laranja":"text-stone-500"} h-10 items-center p-3`} to="/categorias">Categorias</Link>
-                    <Link className={`${loc.pathname==="/pedidos"?"bg-slate-100 text-laranja":"text-stone-500"} h-10 items-center p-3`} to="/pedidos">Meus Pedidos</Link>
+                    <nav className="text-black flex flex-col ">
+                        <div className="border border-black"></div>
+                        <Link className={`${loc.pathname==="/"?"bg-slate-100 text-laranja":"text-stone-500"} h-10 items-center rounded-lg p-3 hover:bg-slate-400 hover:text-laranja`} to="/"> Home</Link>
+                        <Link className={`${loc.pathname==="/produtos"?"bg-slate-100 text-laranja":"text-stone-500"} h-10 items-center p-3 hover:bg-sky-700`} to="/produtos">Produtos</Link>
+                        <Link className={`${loc.pathname==="/categorias"?"bg-slate-100 text-laranja":"text-stone-500"} h-10 items-center p-3`} to="/categorias">Categorias</Link>
+                        <Link className={`${loc.pathname==="/pedidos"?"bg-slate-100 text-laranja":"text-stone-500"} h-10 items-center p-3`} to="/pedidos">Meus Pedidos</Link>
                     </nav>
                     <footer className="flex flex-col mt-20">
                         <div className="border border-black w-full"></div>
@@ -67,10 +69,15 @@ export default function Header(){
                         
                     </footer>
                    
-                </aside>
+                </div>
 
                 <img src="../src/assets/images/logo.png" alt="logo e-rede" className="h-7 w-[72px]"/>
-                <MdOutlineShoppingCart className="h-6 w-6"/>
+                <Link to="/cart/">
+                    <MdOutlineShoppingCart />
+                    <p className="absolute top-3 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">9</p>  
+                </Link>
+ 
+                
             </header>
             <main className="flex justify-center  gap-2">
                 

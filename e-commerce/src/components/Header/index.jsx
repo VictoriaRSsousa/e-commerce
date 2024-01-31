@@ -2,13 +2,16 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoMdSearch } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 
-export default function Header(){
+export default function Header(props){
     const loc = useLocation()
     const routeHome = loc.pathname==="/"
     console.log(loc.pathname)
     console.log(routeHome)
+
+    
 
     return(
         
@@ -30,7 +33,8 @@ export default function Header(){
                     </Link>
                     <Link to="/cart">
                     <MdOutlineShoppingCart className="w-6 h-6"/>
-                    <p className="absolute top-12 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">9</p>
+                    {props.total>0?<p className="absolute top-3 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">{props.total}</p>:null}
+
                     </Link>
                 </article>
             </main>
@@ -74,7 +78,9 @@ export default function Header(){
                 <img src="../src/assets/images/logo.png" alt="logo e-rede" className="h-7 w-[72px]"/>
                 <Link to="/cart/">
                     <MdOutlineShoppingCart />
-                    <p className="absolute top-3 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">9</p>  
+                    {props.total>0?<p className="absolute top-3 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">{props.total}</p>:null}
+                      
+                    
                 </Link>
  
                 

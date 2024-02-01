@@ -18,6 +18,6 @@ export  const arrayDeSapatos = [
     {id:17, modelo: 'Mizuno Wave Rider', tipo: 'Corrida', valor: 169.99 },
     {id:18, modelo: 'Lacoste Carnaby Evo', tipo: 'Casual', valor: 109.99 },
     {id:19, modelo: 'Etnies Jameson 2 Eco', tipo: 'Skate', valor: 59.99 },
-    {id:10, modelo: 'Clarks Desert Boot', tipo: 'Botas', valor: 129.99 }
+    {id:20, modelo: 'Clarks Desert Boot', tipo: 'Botas', valor: 129.99 }
     // Adicione mais objetos conforme necessário
   ];

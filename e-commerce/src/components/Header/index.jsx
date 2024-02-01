@@ -7,9 +7,7 @@ import { useEffect } from "react";
 
 export default function Header(props){
     const loc = useLocation()
-    const routeHome = loc.pathname==="/"
-    console.log(loc.pathname)
-    console.log(routeHome)
+
 
     
 

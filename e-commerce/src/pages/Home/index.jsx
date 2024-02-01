@@ -8,8 +8,7 @@ import { CartContext } from "../../contexts/CartContext";
 
 export default function Home(){
  const [total,setTotal] =  useState(0)
-const {cart} = useContext(CartContext)
-console.log(cart)
+
     return(
         <>
             <Header total={total} />

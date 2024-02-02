@@ -3,11 +3,15 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { arrayDeSapatos } from "../../api";
 
-import { useContext, useState } from "react";
-import { CartContext } from "../../contexts/CartContext";
+import { useEffect, useState } from "react";
 
-export default function Home(){
- const [total,setTotal] =  useState(0)
+
+export default function Home(){  
+    const [total,setTotal] =  useState( localStorage.getItem("total")||0)
+    
+    useEffect(()=>{
+        localStorage.setItem("total",total)
+    },[total])
 
     return(
         <>

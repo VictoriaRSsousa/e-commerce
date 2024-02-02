@@ -31,7 +31,7 @@ export default function Header(props){
                     </Link>
                     <Link to="/cart">
                     <MdOutlineShoppingCart className="w-6 h-6"/>
-                    {props.total>0?<p className="absolute top-3 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">{props.total}</p>:null}
+                    {props.total>0?<p className="absolute top-11 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">{props.total}</p>:null}
 
                     </Link>
                 </article>
@@ -51,7 +51,7 @@ export default function Header(props){
             <button className="peer">
             <GiHamburgerMenu className="h-6 w-7"/>
             </button>
-                <div className="h-96 w-64 p-8 bg-zinc-50 fixed peer-focus:left-0 top-0 z-50	 left-[-100vw] font-semibold rounded-r-lg -top-0 duration-200 out-in-ease">
+                <div className="h-96 w-64 p-8 bg-zinc-50 fixed peer-focus:left-0 top-0 z-50	 left-[-100vw] font-semibold rounded-r-lg  duration-200 out-in-ease">
                     <h2 className="text-black">Páginas</h2>
                     <nav className="text-black flex flex-col ">
                         <div className="border border-black"></div>

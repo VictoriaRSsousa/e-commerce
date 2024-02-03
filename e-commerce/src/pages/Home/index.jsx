@@ -3,19 +3,14 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { arrayDeSapatos } from "../../api";
 
-import { useEffect, useState } from "react";
 
 
 export default function Home(){  
-    const [total,setTotal] =  useState( localStorage.getItem("total")||0)
-    
-    useEffect(()=>{
-        localStorage.setItem("total",total)
-    },[total])
+
 
     return(
         <>
-            <Header total={total} />
+            <Header />
             <div className="flex items-end justify-center md:justify-end  ">
                 <img src="../src/assets/images/promocaoDesktop.png" alt="" className="hidden md:flex w-screen" />
                 <button className="absolute text-white text-Inter font-semibold bg-laranja  rounded-none md:rounded-lg w-72 md:w-80 h-10 md:h-16 mb-7 md:mb-32 md:mr-28"> Aproveitar Oferta </button>
@@ -25,7 +20,7 @@ export default function Home(){
                 <h2 className="text-azul-escuro mb-5 md:mb-6  ml-3 md:ml-5 text-Inter font-semibold text-xl">Destaques</h2>
                 <div className="grid grid-cols-2 md:grid-cols-6 gap-2 md:gap-10">
                     
-                {arrayDeSapatos.map((sapato)=>(<Destaque key={sapato.id} sapato={sapato} setTotal={setTotal}/>))}
+                {arrayDeSapatos.map((sapato)=>(<Destaque key={sapato.id} sapato={sapato}/>))}
                 </div>
             </section>
 

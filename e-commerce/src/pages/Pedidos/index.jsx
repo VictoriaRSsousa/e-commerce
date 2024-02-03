@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import CardPedido from "../../components/CardPedido";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 
-
+import { PedidosContext } from "../../contexts/PedidosContext";
 export default function Pedidos(){
+
+    const {pedidos} = useContext(PedidosContext)
     return(
         <>
         <Header/>
@@ -25,8 +28,7 @@ export default function Pedidos(){
                     </div>
                     
                     <div className="">                      
-                        <CardPedido/>
-                        <CardPedido/>
+                        {pedidos.filter((sapato)=>(sapato.qtd>0)).map((p)=>(<CardPedido key={pedidos.id} p={p}/>))}
                     </div>
 
                 </section>

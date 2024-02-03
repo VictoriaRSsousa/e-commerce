@@ -7,8 +7,7 @@ import Cart from "./pages/Cart"
 import Pedidos from "./pages/Pedidos"
 import Produtos from "./pages/Produtos"
 import Categorias from "./pages/Categorias"
-// import Produtos from "./pages/Produtos"
-// import Categorias from "./pages/Categorias"
+
 function App() {
 
 

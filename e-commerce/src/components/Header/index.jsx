@@ -2,13 +2,18 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoMdSearch } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { CartTotalContext } from "../../contexts/CartTotalContext";
 
 
-export default function Header(props){
+export default function Header(){
     const loc = useLocation()
+    const {cartTotal} = useContext(CartTotalContext)
 
 
+    useEffect(()=>{
+        localStorage.setItem("totalCart",cartTotal)
+    },[cartTotal])
     
 
     return(
@@ -31,7 +36,7 @@ export default function Header(props){
                     </Link>
                     <Link to="/cart">
                     <MdOutlineShoppingCart className="w-6 h-6"/>
-                    {props.total>0?<p className="absolute top-11 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">{props.total}</p>:null}
+                    {cartTotal>0?<p className="absolute top-11 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">{cartTotal}</p>:null}
 
                     </Link>
                 </article>
@@ -76,7 +81,7 @@ export default function Header(props){
                 <img src="../src/assets/images/logo.png" alt="logo e-rede" className="h-7 w-[72px]"/>
                 <Link to="/cart/">
                     <MdOutlineShoppingCart />
-                    {props.total>0?<p className="absolute top-3 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">{props.total}</p>:null}
+                    {cartTotal>0?<p className="absolute top-3 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">{cartTotal}</p>:null}
                       
                     
                 </Link>

@@ -1,11 +1,11 @@
-import { useContext } from "react";
+
 import CardPedido from "../../components/CardPedido";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { CartContext } from "../../contexts/CartContext";
+
 
 export default function Cart(){
-    const {cart} = useContext(CartContext)
+
 
     return(
 

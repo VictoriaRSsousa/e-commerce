@@ -33,7 +33,7 @@ export default function Destaque(props){
             return [...differentItems , {...props.sapato, qtd: qtdItens,status:"Aguardando Pagamento"}]
              })
     },[qtdItens])
-    console.log(pedidos)
+
 
     
 
@@ -51,10 +51,10 @@ export default function Destaque(props){
                 <p className="text-[#EA580C] font-semibold">{props.sapato.valor}</p>
                 
             </div>
-            <div className="flex gap-4	 w-screen"> 
-            {qtdItens>0?<p>{qtdItens}</p>:null}
+            <div className="flex gap-1"> 
+            {qtdItens>0?<p className="text-xs flex items-center">{qtdItens}</p>:null}
              <button className="bg-[#1E3A8A] text-white px-3 rounded-md	font-medium flex  " onClick={()=>handleItens("adicionar")} >Comprar</button>
-             {qtdItens>0?<button className="bg-red-600 text-white  rounded-md	flex justify-center items-center w-8 " onClick={()=>handleItens("remover")}><RiDeleteBin5Line/></button>:null}
+             {qtdItens>0?<button className="bg-red-600 text-white  rounded-md	flex justify-center items-center w-5 " onClick={()=>handleItens("remover")}><RiDeleteBin5Line/></button>:null}
             </div>
             
         </section>

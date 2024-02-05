@@ -6,7 +6,6 @@ import Header from "../../components/Header";
 import { PedidosContext } from "../../contexts/PedidosContext";
 export default function Pedidos(){
 
-    const {pedidos} = useContext(PedidosContext)
     return(
         <>
         <Header/>
@@ -28,7 +27,7 @@ export default function Pedidos(){
                     </div>
                     
                     <div className="">                      
-                        {pedidos.filter((sapato)=>(sapato.qtd>0)).map((p)=>(<CardPedido key={pedidos.id} p={p}/>))}
+                        
                     </div>
 
                 </section>

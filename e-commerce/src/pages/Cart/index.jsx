@@ -2,10 +2,15 @@
 import CardPedido from "../../components/CardPedido";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
+import { useContext } from "react";
+import { PedidosContext } from "../../contexts/PedidosContext";
 
 
 export default function Cart(){
 
+    const {pedidos} = useContext(PedidosContext)
+    const filtar =pedidos.filter((sapato)=>(sapato.qtd>0))
+    const somar =filtar.reduce((acc, atual)=>acc+atual.valor,0)
 
     return(
 
@@ -15,21 +20,19 @@ export default function Cart(){
                     <h2 className="text-black">Meu Carrinho</h2>
                     <div className="text-black flex flex-col ">
                         <div className="border border-black"></div>
-                            <CardPedido/>
-                            <CardPedido/>
-                            <article>
-                                <h2>Total:</h2>
-                                <p>R$ 400,00</p>
-                            </article>
-
-
+                        <div className="flex flex-col gap-5">
+                        {pedidos.filter((sapato)=>(sapato.qtd>0)).map((p)=>(<CardPedido key={pedidos.id} p={p}/>))}
+                        </div>
                     </div>
                     <footer className="flex flex-col mt-20">
                         <div className="border border-black w-full"></div>
-                        <div className="my-3 flex flex-colum  items-center">
-              
-                    
-
+                        <article className="flex gap-6">
+                                <h2>Valor Total:</h2>
+                                {<p>{somar}</p>||0}
+                            </article>
+                        <div className="my-3  flex justify-between items-center">
+                            <a href=""> Esvaziar Carrinho</a>
+                            <button className="bg-azul-escuro text-white w-48 h-10 rounded-xl  font-medium">Finalizar Compra</button>
                         </div>
                         
                     </footer>

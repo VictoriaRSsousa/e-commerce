@@ -80,7 +80,7 @@ export default function Header(){
 
                 <img src="../src/assets/images/logo.png" alt="logo e-rede" className="h-7 w-[72px]"/>
                 <Link to="/cart/">
-                    <MdOutlineShoppingCart />
+                    <MdOutlineShoppingCart className="  h-6 w-6"/>
                     {cartTotal>0?<p className="absolute top-3 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">{cartTotal}</p>:null}
                       
                     

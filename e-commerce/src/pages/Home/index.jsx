@@ -20,7 +20,7 @@ export default function Home(){
                 <h2 className="text-azul-escuro mb-5 md:mb-6  ml-3 md:ml-5 text-Inter font-semibold text-xl">Destaques</h2>
                 <div className="grid grid-cols-2 md:grid-cols-6 gap-2 md:gap-10">
                     
-                {arrayDeSapatos.map((sapato)=>(<Destaque key={sapato.id} sapato={sapato}/>))}
+                {arrayDeSapatos.filter((sapato)=>sapato.id<13).map((sapato)=>(<Destaque key={sapato.id} sapato={sapato}/>))}
                 </div>
             </section>
 

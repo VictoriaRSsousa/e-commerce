@@ -1,7 +1,22 @@
 import { Link } from "react-router-dom"
+import { useState } from "react"
+import loginEmulate from "../../utils/loginEmulate"
 export default function Login(){
+    const [userLogin,setUserLogin] = useState({email:"",password:""})
     function handleSubmit(event){
+        //No manipulador de eventos onSubmit, chame o método preventDefault()
+        // para impedir o comportamento padrão de envio do formulário
         event.preventDefault()
+        console.log(userLogin)
+    }
+
+    function handleInfoChanges(event){
+        setUserLogin({...userLogin,[event.target.name]:event.target.value})
+    }
+
+    function handleButton(){
+        loginEmulate(userLogin)
+
     }
     return(
         <main className="flex flex-col md:flex-row relative items-center   font-Inter text-base " >
@@ -11,12 +26,12 @@ export default function Login(){
                         <h2 className="font-semibold text-2xl">Fazer Login</h2>
                         
                         <label className="flex flex-col font-semibold ">E-mail:*
-                            <input type="text" placeholder="   Digite seu e-mail" className="bg-slate-100 h-10 rounded-lg w-64 font-medium placeholder-stone-500"/>
+                            <input type="email" placeholder="   Digite seu e-mail" onChange={handleInfoChanges} name="email" className="bg-slate-100 h-10 rounded-lg w-64 font-medium placeholder-stone-500"/>
                         </label>
                         <label className="flex flex-col font-semibold ">Senha:*
-                            <input type="text" placeholder="   Digite sua senha" className="bg-slate-100 h-10 rounded-lg w-64 font-medium placeholder-stone-500" />
+                            <input type="password" placeholder="   Digite sua senha" onChange={handleInfoChanges} name="password" className="bg-slate-100 h-10 rounded-lg w-64 font-medium placeholder-stone-500" />
                         </label>
-                        <button type="submit" className="bg-laranja text-white rounded-lg h-14 w-64 px-5 ">Fazer Login</button>
+                        <button type="submit" className="bg-laranja text-white rounded-lg h-14 w-64 px-5  " onClick={handleButton}>Fazer Login</button>
                     </form>
                     <span className="flex gap-2">
                         <p>Não possui Cadastro? </p>

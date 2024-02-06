@@ -4,20 +4,18 @@ import { PedidosContext } from "../../contexts/PedidosContext";
 import { CartTotalContext } from "../../contexts/CartTotalContext"
 
 export default function Destaque(props){
-     const {setCartTotal} = useContext(CartTotalContext)
+     const {cartTotal,setCartTotal} = useContext(CartTotalContext)
      const [qtdItens, setqtdItens] = useState(parseInt(localStorage.getItem(`${props.sapato.id}`))|| 0)
      const {pedidos,setPedidos} = useContext(PedidosContext)
 
-
+    
 
     function handleItens(action){
         if(action==="adicionar"){
 
             setqtdItens((preview)=>preview+1)
             setCartTotal((preview)=>preview+1)
-            
-
-            // setPedidos([(preview)=>({...preview,pedido})])                 
+                        
         }else{
             if(qtdItens>0){
                 setqtdItens((preview)=>preview-1)
@@ -35,7 +33,11 @@ export default function Destaque(props){
     },[qtdItens])
 
 
-    
+    useEffect(()=>{
+        if(cartTotal===0){
+            setqtdItens(0)
+        }
+    },[cartTotal])
 
     return(
         <>

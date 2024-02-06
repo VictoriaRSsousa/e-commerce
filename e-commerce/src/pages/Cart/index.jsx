@@ -4,13 +4,20 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { useContext } from "react";
 import { PedidosContext } from "../../contexts/PedidosContext";
+import { CartTotalContext } from "../../contexts/CartTotalContext";
 
 
 export default function Cart(){
 
-    const {pedidos} = useContext(PedidosContext)
+    const {pedidos,setPedidos} = useContext(PedidosContext)
+    const {setCartTotal} = useContext(CartTotalContext)
     const filtar =pedidos.filter((sapato)=>(sapato.qtd>0))
     const somar =filtar.reduce((acc, atual)=>acc+atual.valor,0)
+
+    function handleCart(){
+        setPedidos([])
+        setCartTotal(0)
+    }
 
     return(
 
@@ -31,7 +38,7 @@ export default function Cart(){
                                 {<p>{somar}</p>||0}
                             </article>
                         <div className="my-3  flex justify-between items-center">
-                            <a href=""> Esvaziar Carrinho</a>
+                            <a onClick={handleCart}> Esvaziar Carrinho</a>
                             <button className="bg-azul-escuro text-white w-48 h-10 rounded-xl  font-medium">Finalizar Compra</button>
                         </div>
                         

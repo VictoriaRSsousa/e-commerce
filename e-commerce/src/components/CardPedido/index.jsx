@@ -1,4 +1,6 @@
+import {  useLocation } from "react-router-dom";
 export default function CardPedido(props){
+    const loc = useLocation()
 
     return(
         <main className="md:flex justify-between border-t border-stone-500 ">
@@ -13,10 +15,10 @@ export default function CardPedido(props){
             </section>
         </div>
         <div className="">
-            <footer className="flex md:flex justify-around ">
+            {/* <footer className="flex md:flex justify-around ">
                 <p className="md:hidden">Status</p>
-                <p className="flex text-green-700 font-bold">{props.p.status}</p>
-            </footer>
+                {loc.pathname===<p className="flex text-green-700 font-bold">{props.p.status}</p>}
+            </footer> */}
             <div className=""></div>
         </div>
 

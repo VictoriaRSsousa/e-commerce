@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useContext } from "react";
 import { CartTotalContext } from "../../contexts/CartTotalContext";
 import { PedidosContext } from "../../contexts/PedidosContext";
-import CardPedido from "../../components/CardPedido";
+import Cart from "../../components/Cart";
 
 
 
@@ -40,7 +40,7 @@ export default function Header(){
                 <img src="../src/assets/images/logo.png" alt="logo e-rede" className="h-8 w-20"/>  
                 <label htmlFor="" className="flex items-center  ">
                     <IoMdSearch className=" h-6 w-6 m-2 absolute text-cinza-medio"/>
-                    <input type="text " placeholder="         Buscar" className="flex h-10 text-Inter font-normal text-stone-500 w-[520px]"/>
+                    <input type="search " placeholder="         Buscar" className="flex h-10 text-Inter font-normal text-stone-500 w-[520px]"/>
                 </label>
                 <article className="flex text-[white] fonr-semibold gap-5 items-center">
                     <Link to="/cadastro">
@@ -49,11 +49,38 @@ export default function Header(){
                     <Link to="/login">
                     <button className="bg-laranja rounded-lg w-28 h-10">Entrar</button>
                     </Link>
-                    <Link to="/cart">
-                    <MdOutlineShoppingCart className="w-6 h-6"/>
-                    {cartTotal>0?<p className="absolute top-11 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">{cartTotal}</p>:null}
 
-                    </Link>
+                    {/* ------------------------CART DESKTOP----------------------- */}
+                    
+                    <div className="">
+                    <button className="peer">
+                    <MdOutlineShoppingCart className="  h-6 w-6"/>
+                    {cartTotal>0?<p className="absolute top-3 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">{cartTotal}</p>:null}
+                    </button>
+                    <div className="flex flex-col justify-between h-96 w-64 p-8 bg-zinc-50 fixed peer-focus:right-0 top-0 z-50	right-[-100vw] font-semibold rounded-l-lg  duration-200 out-in-ease  overflow-auto ">
+                       <header>
+                            <h2 className="text-black">Meu Carrinho</h2>
+                            <div className="border border-black"></div>
+                        </header>
+                            <div className="text-black flex flex-col gap-6	justify-around ">
+                                {pedidos.filter((sapato)=>(sapato.qtd>0)).map((p)=>(<Cart key={pedidos.id} p={p}/>))}
+                            </div>
+                        <footer className="flex flex-col">
+                            <div className="border border-black "></div>
+                            <article className="flex justify-between text-base	font-semibold	font-Inter">
+                                    <h2 className="text-black">Valor Total:</h2>
+                                    {<p className="text-azul-escuro">{somar}</p>||0}
+                            </article>
+                            <div className=" flex font-Inter justify-around items-center ">
+                                <a onClick={handleCart} className="cursor-pointer text-stone-500 text-[10px]">Esvaziar</a>
+                                <button className="bg-azul-escuro text-white rounded-xl h-6 w-32 text-[10px] font-medium">Finalizar Compra</button>
+                            </div>
+                            
+                        </footer>     
+                    </div>
+                    </div>
+                    {/* ---------------------------------------------------------------------------------- */}
+                   
                 </article>
             </main>
             <footer>
@@ -73,10 +100,11 @@ export default function Header(){
             <header className="flex text-[white] justify-around "> 
 
             {/* ----------------------MENU HAMBURGUER----------------------------------------------*/}
+
             <button className="peer">
             <GiHamburgerMenu className="h-6 w-7"/>
             </button>
-                <div className="h-96 w-64 p-8 bg-zinc-50 fixed peer-focus:left-0 top-0 z-50	 left-[-100vw] font-semibold rounded-r-lg  duration-200 out-in-ease">
+                <div className="h-96 w-64 p-8 bg-zinc-50 fixed peer-focus:left-0 top-0 z-50	 left-[-100vw] font-semibold rounded-r-lg  duration-700	 out-in-ease">
                     <h2 className="text-black">Páginas</h2>
                     <nav className="text-black flex flex-col ">
                         <div className="border border-black"></div>
@@ -97,38 +125,38 @@ export default function Header(){
                     </footer>
                    
                 </div>
-
                 <img src="../src/assets/images/logo.png" alt="logo e-rede" className="h-7 w-[72px]"/>
 
                 {/*-----------------------------------CART------------------------------------------- */}
+                    <div className="relative">
                     <button className="peer">
                     <MdOutlineShoppingCart className="  h-6 w-6"/>
                     {cartTotal>0?<p className="absolute top-3 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">{cartTotal}</p>:null}
                     </button>
-                    <div className="h-96 w-64 p-8 bg-zinc-50 fixed peer-focus:right-0 top-0 z-50	right-[-100vw] font-semibold rounded-l-lg  duration-200 out-in-ease  overflow-auto ">
-                        <div className=" bg-zinc-50  font-semibold rounded-r-lg  ">
+                    <div className="flex flex-col justify-between h-96 w-64 p-8 bg-zinc-50 fixed peer-focus:right-0 top-0 z-50	right-[-100vw] font-semibold rounded-l-lg  duration-1000	 out-in-ease  overflow-auto ">
+                       <header>
                             <h2 className="text-black">Meu Carrinho</h2>
-                            <div className="text-black flex flex-col ">
                             <div className="border border-black"></div>
-                            <div className="flex flex-col gap-3	">
-                                {pedidos.filter((sapato)=>(sapato.qtd>0)).map((p)=>(<CardPedido key={pedidos.id} p={p}/>))}
+                        </header>
+                            <div className="text-black flex flex-col gap-6	justify-around ">
+                                {pedidos.filter((sapato)=>(sapato.qtd>0)).map((p)=>(<Cart key={pedidos.id} p={p}/>))}
                             </div>
-                        </div>
-                        <footer className="flex flex-col">
+                        <footer className="flex flex-col gap-3">
                             <div className="border border-black "></div>
                             <article className="flex justify-between">
                                     <h2 className="text-black">Valor Total:</h2>
                                     {<p className="text-azul-escuro">{somar}</p>||0}
                             </article>
                             <div className=" flex font-Inter justify-around items-center ">
-                                <a onClick={handleCart} className="text-stone-500 text-[10px]">Esvaziar</a>
+                                <a onClick={handleCart} className="cursor-pointer text-stone-500 text-[10px]">Esvaziar</a>
                                 <button className="bg-azul-escuro text-white rounded-xl h-6 w-32 text-[10px] font-medium">Finalizar Compra</button>
                             </div>
                             
-                        </footer>
-                        </div>
+                        </footer>     
                     </div>
-                    
+                    </div>
+
+                    {/* </ul> */}
                 
             {/* ------------------------------------------PLACEHOLDER------------------------------------------- */}
                 

@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom"
 
-export default function loginEmulate(user){
 
-    const {email,password} = user
-    if(email==="victoria@email.com" && password==="senha") {
-        console.log("autenticado")
+export default function loginEmulate(){
+
+    const a=1
+    // const {email,password} = userLogin
+    // if(email===user.email && password===user.password) {
+    //     console.log("autenticado")
         
 
-    }else
-        console.log("nao autenticado")
+    // }else
+    //     console.log("nao autenticado")
 }

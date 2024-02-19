@@ -7,8 +7,6 @@ import { CartTotalContext } from "../../contexts/CartTotalContext";
 import { PedidosContext } from "../../contexts/PedidosContext";
 import Cart from "../../components/Cart";
 
-
-
 export default function Header(){
     const loc = useLocation()
     const {cartTotal} = useContext(CartTotalContext)
@@ -20,15 +18,12 @@ export default function Header(){
 
     const {pedidos,setPedidos} = useContext(PedidosContext)
     const {setCartTotal} = useContext(CartTotalContext)
-    const filtar =pedidos.filter((sapato)=>(sapato.qtd>0))
-    const somar =filtar.reduce((acc, atual)=>acc+atual.valor,0)
+    const somar =pedidos.filter((sapato)=>(sapato.qtd>0)).map((sapato)=>sapato.qtd*sapato.valor).reduce((acc, atual)=>acc+atual,0)
 
     function handleCart(){
         setPedidos([])
         setCartTotal(0)
     }
-    
-
     return(
         
         <>
@@ -68,7 +63,7 @@ export default function Header(){
                             <div className="border border-black "></div>
                             <article className="flex justify-between text-base	font-semibold	font-Inter">
                                     <h2 className="text-black">Valor Total:</h2>
-                                    {<p className="text-azul-escuro">{somar}</p>||0}
+                                    {<p className="text-azul-escuro">{somar.toFixed(2)}</p>||0}
                             </article>
                             <div className=" flex font-Inter justify-around items-center ">
                                 <a onClick={handleCart} className="cursor-pointer text-stone-500 text-[10px]">Esvaziar</a>

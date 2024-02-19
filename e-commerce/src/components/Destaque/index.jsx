@@ -1,5 +1,4 @@
 import { useContext, useState ,useEffect} from "react"
-import { RiDeleteBin5Line } from "react-icons/ri";
 import { PedidosContext } from "../../contexts/PedidosContext";
 import { CartTotalContext } from "../../contexts/CartTotalContext"
 
@@ -53,10 +52,10 @@ export default function Destaque(props){
                 <p className="text-[#EA580C] font-semibold">{props.sapato.valor}</p>
                 
             </div>
-            <div className="flex gap-1"> 
+            <div className="flex "> 
             {/* {qtdItens>0?<p className="text-xs flex items-center">{qtdItens}</p>:null} */}
              <button className="bg-[#1E3A8A] text-white px-3 rounded-md	font-medium flex cursor-pointer " onClick={()=>handleItens("adicionar")} >Comprar</button>
-             {/* {qtdItens>0?<button className="bg-red-600 text-white  rounded-md	flex justify-center items-center w-5 " onClick={()=>handleItens("remover")}><RiDeleteBin5Line/></button>:null} */}
+           
             </div>
             
         </section>

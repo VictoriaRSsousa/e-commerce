@@ -2,27 +2,37 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoMdSearch } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useContext } from "react";
-import { CartTotalContext } from "../../contexts/CartTotalContext";
+import { useEffect, useContext, useState } from "react";
 import { PedidosContext } from "../../contexts/PedidosContext";
-import Cart from "../../components/Cart";
+import { ComprasContext } from "../../contexts/ComprasContext";
+import CartCard from "../CartCard";
+
 
 export default function Header(){
     const loc = useLocation()
-    const {cartTotal} = useContext(CartTotalContext)
 
-
+    
+    const { compras, setCompras} = useContext(ComprasContext)
+    const {pedidos,setPedidos} = useContext(PedidosContext)
+    const somar =pedidos.filter((sapato)=>(sapato.qtd>0)).map((sapato)=>sapato.qtd*sapato.valor).reduce((acc, atual)=>acc+atual,0)
+    
+    const totalCart = pedidos.filter((sapato)=>(sapato.qtd>0)).map((sapato)=>sapato.qtd).reduce((acc, atual)=>acc+atual,0) || parseInt(localStorage.getItem("totalCart"))
+    
+    const [cartTotal, setCartTotal] = useState(totalCart)
+    
     useEffect(()=>{
-        localStorage.setItem("totalCart",cartTotal)
+        localStorage.setItem("totalCart",totalCart)
     },[cartTotal])
 
-    const {pedidos,setPedidos} = useContext(PedidosContext)
-    const {setCartTotal} = useContext(CartTotalContext)
-    const somar =pedidos.filter((sapato)=>(sapato.qtd>0)).map((sapato)=>sapato.qtd*sapato.valor).reduce((acc, atual)=>acc+atual,0)
 
     function handleCart(){
         setPedidos([])
         setCartTotal(0)
+
+    }
+
+    function handleCompra(){
+        setCompras()
     }
     return(
         
@@ -49,15 +59,16 @@ export default function Header(){
                     
                     <button className="peer">
                     <MdOutlineShoppingCart className="  h-6 w-6"/>
-                    {cartTotal>0?<p className="absolute top-10 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">{cartTotal}</p>:null}
+                    {totalCart>0?<p className="absolute top-10 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">{totalCart}</p>:null}
                     </button>
-                    <div className="flex flex-col justify-between h-96 w-64 p-8 bg-zinc-50 fixed peer-focus:right-0 top-0 z-50	right-[-100vw] font-semibold rounded-l-lg  duration-500 out-in-ease  overflow-auto ">
+                    {/* <Cart/> */}
+                    <div className="flex flex-col justify-between h-96 w-64 p-8 bg-zinc-50 fixed peer-focus:right-0 top-0 z-50	right-[-100vw] font-semibold rounded-l-lg  duration-1000 out-in-ease  overflow-auto ">
                        <header>
                             <h2 className="text-black">Meu Carrinho</h2>
                             <div className="border border-black"></div>
                         </header>
                             <div className="text-black flex flex-col gap-6	justify-around ">
-                                {pedidos.filter((sapato)=>(sapato.qtd>0)).map((p)=>(<Cart key={pedidos.id} p={p}/>))}
+                                {pedidos.filter((sapato)=>(sapato.qtd>0)).map((p)=>(<CartCard key={pedidos.id} p={p}/>))}
                             </div>
                         <footer className="flex flex-col">
                             <div className="border border-black "></div>
@@ -67,7 +78,7 @@ export default function Header(){
                             </article>
                             <div className=" flex font-Inter justify-around items-center ">
                                 <a onClick={handleCart} className="cursor-pointer text-stone-500 text-[10px]">Esvaziar</a>
-                                <button className="bg-azul-escuro text-white rounded-xl h-6 w-32 text-[10px] font-medium">Finalizar Compra</button>
+                                <button onClick={handleCompra}  className="bg-azul-escuro text-white rounded-xl h-6 w-32 text-[10px] font-medium">Finalizar Compra</button>
                             </div>
                             
                         </footer>     
@@ -88,7 +99,7 @@ export default function Header(){
         </section>
 
         
-        {/* HEADER MD */}
+        {/* ---------------------------------------HEADER MD -------------------------------------------*/}
         <section className="bg-[#1E3A8A] flex flex-col h-36 p-8 gap-3 md:hidden" >
             <header className="flex text-[white] justify-around "> 
 
@@ -121,42 +132,42 @@ export default function Header(){
                 <img src="../src/assets/images/logo.png" alt="logo e-rede" className="h-7 w-[72px]"/>
 
                 {/*-----------------------------------CART------------------------------------------- */}
-                    <div className="relative">
-                    <button className="peer">
-                    <MdOutlineShoppingCart className="  h-6 w-6"/>
-                    {cartTotal>0?<p className="absolute top-3 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">{cartTotal}</p>:null}
-                    </button>
-                    <div className="flex flex-col justify-between h-96 w-64 p-8 bg-zinc-50 fixed peer-focus:right-0 top-0 z-50	right-[-100vw] font-semibold rounded-l-lg  duration-1000	 out-in-ease  overflow-auto ">
-                       <header>
-                            <h2 className="text-black">Meu Carrinho</h2>
-                            <div className="border border-black"></div>
-                        </header>
-                            <div className="text-black flex flex-col gap-6	justify-around ">
-                                {pedidos.filter((sapato)=>(sapato.qtd>0)).map((p)=>(<Cart key={pedidos.id} p={p}/>))}
-                            </div>
-                        <footer className="flex flex-col gap-3">
-                            <div className="border border-black "></div>
-                            <article className="flex justify-between">
-                                    <h2 className="text-black">Valor Total:</h2>
-                                    {<p className="text-azul-escuro">{somar}</p>||0}
-                            </article>
-                            <div className=" flex font-Inter justify-around items-center ">
-                                <a onClick={handleCart} className="cursor-pointer text-stone-500 text-[10px]">Esvaziar</a>
-                                <button className="bg-azul-escuro text-white rounded-xl h-6 w-32 text-[10px] font-medium">Finalizar Compra</button>
-                            </div>
-                            
-                        </footer>     
-                    </div>
-                    </div>
 
-                    {/* </ul> */}
+
+                <div className="relative">
+        <button className="peer">
+        <MdOutlineShoppingCart className="  h-6 w-6"/>
+        {totalCart>0?<p className="absolute top-3 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">{totalCart}</p>:null}
+        </button>
+        <div className="flex flex-col justify-between h-96 w-64 p-8 bg-zinc-50 fixed peer-focus:right-0 top-0 z-50	right-[-100vw] font-semibold rounded-l-lg  duration-1000	 out-in-ease  overflow-auto ">
+           <header>
+                <h2 className="text-black">Meu Carrinho</h2>
+                <div className="border border-black"></div>
+            </header>
+                <div className="text-black flex flex-col gap-6	justify-around ">
+                    {pedidos.filter((sapato)=>(sapato.qtd>0)).map((p)=>(<CartCard key={pedidos.id} p={p}/>))}
+                </div>
+            <footer className="flex flex-col gap-3">
+                <div className="border border-black "></div>
+                <article className="flex justify-between">
+                        <h2 className="text-black">Valor Total:</h2>
+                        {<p className="text-azul-escuro">{somar.toFixed(2)}</p>||0}
+                </article>
+                <div className=" flex font-Inter justify-around items-center ">
+                    <a onClick={handleCart} className="cursor-pointer text-stone-500 text-[10px]">Esvaziar</a>
+                    <button onClick={handleCompra} className="bg-azul-escuro text-white rounded-xl h-6 w-32 text-[10px] font-medium">Finalizar Compra</button>
+                </div>
+                
+            </footer>     
+        </div>
+        </div>
                 
             {/* ------------------------------------------PLACEHOLDER------------------------------------------- */}
                 
             </header>
             <main className="flex justify-center  gap-2">
                 
-                <label htmlFor="" className="flex items-center">
+                <label htmlFor="" className="flex relative items-center">
                     <IoMdSearch className=" h-4 absolute m-2 text-[#666666DD]"/>
                     <input type="text " placeholder="       Buscar" className="w-64 rounded h-8"/>
                 </label>

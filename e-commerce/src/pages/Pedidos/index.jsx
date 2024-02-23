@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import CardPedido from "../../components/CardPedido";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";

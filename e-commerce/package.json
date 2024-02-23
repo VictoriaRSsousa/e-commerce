@@ -10,6 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "pg": "^8.11.3",
+    "pg-format": "^1.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",

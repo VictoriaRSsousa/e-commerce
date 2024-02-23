@@ -1,29 +1,29 @@
 import { useContext, useState ,useEffect} from "react"
 import { PedidosContext } from "../../contexts/PedidosContext";
-import { CartTotalContext } from "../../contexts/CartTotalContext"
+
 
 export default function Destaque(props){
-     const {cartTotal,setCartTotal} = useContext(CartTotalContext)
      const [qtdItens, setqtdItens] = useState(parseInt(localStorage.getItem(`${props.sapato.id}`))|| 0)
      const {pedidos,setPedidos} = useContext(PedidosContext)
-
     
 
     function handleItens(action){
         if(action==="adicionar"){
 
             setqtdItens((preview)=>preview+1)
-            setCartTotal((preview)=>preview+1)
                         
-        }else{
-            if(qtdItens>0){
-                setqtdItens((preview)=>preview-1)
-                setCartTotal((preview)=>preview-1)
-            }
         }
+        // else{
+        //     if(qtdItens>0){
+        //         setqtdItens((preview)=>preview-1)
+        //     }
+        // }
     }
+
     useEffect(()=>{
-        localStorage.setItem(`${props.sapato.id}`,qtdItens)
+        if(qtdItens>0){
+            localStorage.setItem(`${props.sapato.id}`,qtdItens)
+        }
 
         setPedidos((preview)=>{
             const differentItems =  preview.filter((item)=>item.id!== props.sapato.id)
@@ -33,10 +33,10 @@ export default function Destaque(props){
 
 
     useEffect(()=>{
-        if(cartTotal===0){
+        if(pedidos.length===0){
             setqtdItens(0)
         }
-    },[cartTotal])
+    },[pedidos])
 
     return(
         <>
@@ -47,7 +47,7 @@ export default function Destaque(props){
         </section>
         <section className="p-2 h-40 w-40 flex flex-col justify-between " >
             <div>
-                <p className="text-[#1E3A8A] text-Inter font-bold">{props.sapato.modelo}</p>
+                <p className="text-[#1E3A8A] text-Inter font-bold text-wrap	">{props.sapato.modelo}</p>
                 <p className="text-[#DDDDDD] font-medium	 ">{props.sapato.tipo}</p>
                 <p className="text-[#EA580C] font-semibold">{props.sapato.valor}</p>
                 

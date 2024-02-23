@@ -1,27 +1,18 @@
-import { RiDeleteBin5Line } from "react-icons/ri";
-// import { useContext} from "react"
+// import { useEffect, useContext } from "react";
 // import { PedidosContext } from "../../contexts/PedidosContext";
-export default function CardPedido(props){
-    function handleItens(action){
-        if(action==="remover"){
-            // console.log(pedidos.qtd);
-        }
+// import { ComprasContext } from "../../contexts/ComprasContext";
+// import { MdOutlineShoppingCart } from "react-icons/md";
+// export default function Cart(){
+//     const {pedidos,setPedidos} = useContext(PedidosContext)
+//     const totalCart = pedidos.filter((sapato)=>(sapato.qtd>0)).map((sapato)=>sapato.qtd).reduce((acc, atual)=>acc+atual,0)
+//     const somar =pedidos.filter((sapato)=>(sapato.qtd>0)).map((sapato)=>sapato.qtd*sapato.valor).reduce((acc, atual)=>acc+atual,0)
 
-    }
-    return(
-        <main className="md:flex justify-between font-Inter">
-            
-            <div className=" flex  gap-4">        
-                <img src="../src/assets/images/shoe.png" alt="" className="w-20 h-[70px] object-cover	" />
-                <section className="">
-                    <h3 className="font-semibold text-sm text-black">{props.p.modelo}</h3>
-                    <p className="font-semibold text-stone-500 text-[10px]">{props.p.tipo}</p>
-                    <span className="flex gap-2 items-center">
-                        <p className="font-semibold text-sm text-black">{props.p.valor} x{props.p.qtd}</p>
-                        <button className="bg-red-600 text-white  rounded-md	flex justify-center items-center w-5 h-5 "><RiDeleteBin5Line/></button>
-                    </span>
-                </section>
-            </div> 
-        </main>
-    )
-}
+//     function handleCart(){
+//         setPedidos([])
+
+//     }
+
+//     return(
+
+//     )
+// }

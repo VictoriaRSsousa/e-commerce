@@ -6,6 +6,7 @@ import Cadastro from "./pages/Cadastro"
 import Pedidos from "./pages/Pedidos"
 import Produtos from "./pages/Produtos"
 import Categorias from "./pages/Categorias"
+import Produto from "./pages/Produto"
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/pedidos/*" element={<Pedidos/>}/>
         <Route path="/produtos/*" element={<Produtos/>}/>
         <Route path="/categorias/*" element={<Categorias/>}/>
+        <Route path="/produto/*" element={<Produto/>}/>
         <Route path="*" element={<div>Pagina nao encontrada</div>}/>
  
       </Routes>

@@ -43,7 +43,7 @@ export default function Destaque(props){
             </div>
             <div className="flex "> 
             {/* {qtdItens>0?<p className="text-xs flex items-center">{qtdItens}</p>:null} */}
-                <Link to="/produto">
+                <Link to={`/produto/${props.sapato.id}`}>
                     <button className="bg-[#1E3A8A] text-white px-3 rounded-md	font-medium flex cursor-pointer " >Detalhes</button>
                 </Link>
             </div>

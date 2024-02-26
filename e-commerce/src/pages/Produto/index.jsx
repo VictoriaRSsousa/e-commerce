@@ -3,6 +3,8 @@ import Header from "../../components/Header";
 import { BiSolidUpArrow,BiSolidDownArrow  } from "react-icons/bi";
 import { arrayDeSapatos } from "../../api/index";
 import { useParams, Navigate } from 'react-router-dom';
+import { useContext, useState} from "react"
+import { PedidosContext } from "../../contexts/PedidosContext";
 
 
 
@@ -10,6 +12,19 @@ import { useParams, Navigate } from 'react-router-dom';
 export default function Produto() {
   const { id } = useParams();
   const sapato = arrayDeSapatos.filter((sapato)=>sapato.id ==parseInt(id))
+
+  const {pedidos,setPedidos} = useContext(PedidosContext)
+  const [qtdItens, setqtdItens] = useState(0)
+
+  function handleQtdItens(action){
+    action==="+"?setqtdItens((preview)=> preview+1):setqtdItens((preview)=> preview-1)
+
+  }
+  function verifyItens(){
+    if(sapato[0].quantidade<qtdItens){
+      alert('Quantidade Indisponível!')
+    }
+  }
   
   return (
     <>
@@ -39,15 +54,15 @@ export default function Produto() {
               <span className="flex flex-col items-center">
                 <p className="font-semibold text-2xl text-black">Quantidade:</p>
                 <div className="flex bg-white border border-black rounded-md h-10 w-24	justify-center items-center gap-3  ">
-                  <p className="text-2xl font-semibold">01</p>
+                  <p className="text-2xl font-semibold">{qtdItens}</p>
                   <div>
-                    <BiSolidUpArrow/>
-                    <BiSolidDownArrow/>
+                    <BiSolidUpArrow onClick={()=>{handleQtdItens("+")}}/>
+                    <BiSolidDownArrow onClick={()=>{handleQtdItens("-")}}/>
                   </div>
 
                 </div>
               </span>
-              <button className="bg-azul-escuro text-white w-[222px] md:w-[352px] h-14	 md:h-20 rounded-lg font-semibold text-2xl">Comprar</button>
+              <button className="bg-azul-escuro text-white w-[222px] md:w-[352px] h-14	 md:h-20 rounded-lg font-semibold text-2xl" onClick={verifyItens}>Comprar</button>
             </article>
           </section>
         </body>

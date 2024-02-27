@@ -21,10 +21,9 @@ export default function Header() {
     pedidos
       .filter((sapato) => sapato.qtd > 0)
       .map((sapato) => sapato.qtd)
-      .reduce((acc, atual) => acc + atual, 0) ||
-    parseInt(localStorage.getItem("totalCart"));
+      .reduce((acc, atual) => acc + atual, 0) 
 
-  const [cartTotal, setCartTotal] = useState(totalCart);
+  const [cartTotal, setCartTotal] = useState(parseInt(localStorage.getItem("totalCart"))|| 0)
   const [search,setSearch] = useState("")
 
   useEffect(() => {
@@ -35,15 +34,21 @@ export default function Header() {
     setPedidos([]);
     setCartTotal(0);
   }
-
   function handleCompra() {
-    setCompras();
+    setCompras((preview)=>{
+      //const differentItems =  preview.filter((item)=>item.id!==pedidos.id)
+      return [{pedido:pedidos,total:somar}]
+               });
+    setPedidos([])
+
   }
 
-//   function handleSearch(event){
-//     setSearch(...search,event.target.value)
-//   }
-//   console.log(search);
+
+  function handleSearch(event){
+    setSearch(event.target.value)
+
+  }
+
   return (
     <>
       {/* ---------------------------------HEADER DESKTOP------------------------------------------------- */}
@@ -291,9 +296,8 @@ export default function Header() {
             <input
               type="text "
               placeholder="       Buscar"
-            //   onChange={handleSearch}
-            //   value={search}
-              name="email"
+              onChange={handleSearch}
+              value={search}
               className="w-64 rounded h-8"
             />
           </label>

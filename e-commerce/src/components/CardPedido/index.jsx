@@ -1,4 +1,5 @@
-export default function CardPedido() {
+export default function CardPedido(props) {
+  
   return (
     <main className=" font-Inter font-semibold  md:flex-col ">
       <div className="border-t border-stone-500   "></div>
@@ -11,9 +12,9 @@ export default function CardPedido() {
               className="w-20 h-[70px] object-cover rounded-lg	"
             />
             <div>
-              <p className="text-sm">Nique Air Surf</p>
-              <p className="text-[10px] text-stone-500 mb-[6px]">Tênis</p>
-              <p className="text-xs text-black md:text-laranja"> R$ 220,00 </p>
+              <p className="text-sm">{props.compra.pedido[0].modelo}</p>
+              <p className="text-[10px] text-stone-500 mb-[6px]">{props.compra.pedido[0].tipo}</p>
+              <p className="text-xs text-black md:text-laranja"> {props.compra.total} </p>
             </div>
           </div>
         </section>

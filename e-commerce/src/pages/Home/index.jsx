@@ -13,7 +13,7 @@ export default function Home(){
             <Header />
             <div className="flex items-end justify-center md:justify-end  ">
                 <img src="../src/assets/images/promocaoDesktop.png" alt="" className="hidden md:flex w-screen" />
-                <button className="absolute text-white text-Inter font-semibold bg-laranja  rounded-none md:rounded-lg w-72 md:w-80 h-10 md:h-16 mb-7 md:mb-32 md:mr-28"> Aproveitar Oferta </button>
+                <button className="absolute text-white text-Inter font-semibold bg-laranja  rounded-none md:rounded-lg  w-full md:w-80 h-10 md:h-16 mb-7 md:mb-32 md:mr-28"> Aproveitar Oferta </button>
                 <img src="../src/assets/images/promocaoMobile.png" alt="" className="w-full flex md:hidden " />
             </div>
             <section className="p-3 md:p-24 ">

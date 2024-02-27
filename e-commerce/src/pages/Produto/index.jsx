@@ -3,29 +3,58 @@ import Header from "../../components/Header";
 import { BiSolidUpArrow,BiSolidDownArrow  } from "react-icons/bi";
 import { arrayDeSapatos } from "../../api/index";
 import { useParams, Navigate } from 'react-router-dom';
-import { useContext, useState} from "react"
+import { useContext, useState, useEffect} from "react"
 import { PedidosContext } from "../../contexts/PedidosContext";
 
 
-
+//FALTA APAGAR A QUANTIDADE DE ITENS DO LOCALSTORAGE
 
 export default function Produto() {
   const { id } = useParams();
   const sapato = arrayDeSapatos.filter((sapato)=>sapato.id ==parseInt(id))
 
   const {pedidos,setPedidos} = useContext(PedidosContext)
-  const [qtdItens, setqtdItens] = useState(0)
+  const [qtdItens, setqtdItens] = useState(parseInt(localStorage.getItem(`${sapato.id}`))|| 0)
+
+
+
 
   function handleQtdItens(action){
-    action==="+"?setqtdItens((preview)=> preview+1):setqtdItens((preview)=> preview-1)
+    if(action === "+"){
+      setqtdItens((preview)=> preview+1)
+    }
+    if(action==="-" && qtdItens>0){
+      setqtdItens((preview)=> preview-1)
+    }
 
   }
   function verifyItens(){
     if(sapato[0].quantidade<qtdItens){
       alert('Quantidade Indisponível!')
-    }
+    }else
+      setPedidos((preview)=>{
+        const differentItems =  preview.filter((item)=>item.id!== sapato[0].id)
+        return [...differentItems , {...sapato[0], qtd: qtdItens}]
+        })
+
   }
   
+    
+  useEffect(()=>{
+      
+    if(qtdItens>0){
+        localStorage.setItem(`${sapato[0].id}`,qtdItens)
+    }
+},[qtdItens])
+
+useEffect(()=>{
+    if(pedidos.length===0){
+      setqtdItens(0)
+    }
+},[pedidos])
+
+
+
   return (
     <>
       <Header />

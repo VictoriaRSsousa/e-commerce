@@ -2,10 +2,14 @@ import { RiH1 } from "react-icons/ri";
 import CardPedido from "../../components/CardPedido";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { useEffect, useState } from "react"; 
+import { useEffect, useState,useContext } from "react"; 
+import { ComprasContext } from "../../contexts/ComprasContext";
 
 export default function Pedidos(){
     const [opcaoSelecionada, setOpcaoSelecionada] = useState("");
+
+    const { compras, setCompras } = useContext(ComprasContext);
+    console.log(compras);
 
     function handleOpcao(event){
         setOpcaoSelecionada(event.target.value)
@@ -52,10 +56,15 @@ export default function Pedidos(){
                                         <p className="hidden md:flex">Meus Pedidos</p>
                                     </span>
                                 </div>
-                                            
+    {/* {pedidos
+    // .filter((sapato) => sapato.qtd > 0)
+    // .map((p) => (
+    //   <CartCard key={pedidos.id} p={p} />
+    // ))} */}
                                 <div className=" my-5 flex flex-col gap-5">   
-                                    <CardPedido/>
-                                    <CardPedido/>     
+                                    {compras.map((compra)=>(
+                                        <CardPedido compra ={compra} key={compras.id}/>
+                                    ))}   
                                 </div>              
                                                 
                             </section>    

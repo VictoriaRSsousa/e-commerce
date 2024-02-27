@@ -3,10 +3,17 @@ import Header from "../../components/Header";
 import { arrayDeSapatos } from "../../api";
 import Destaque from "../../components/Destaque";
 import { useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 
 export default function Produtos() {
 
-  const [opcaoSelecionada, setOpcaoSelecionada] = useState("");
+  
+  
+  const search = useLocation().search.slice(11)
+  const [opcaoSelecionada, setOpcaoSelecionada] = useState(search);
+  
+
+
 
   function handleOpcaoChange(event) {
     setOpcaoSelecionada(event.target.value);
@@ -15,6 +22,7 @@ export default function Produtos() {
 
   const allCategorias = arrayDeSapatos.map((sapato) => sapato.tipo);
   const categorias = [...new Set(allCategorias)];
+  console.log(categorias);
   const categoriasSelecionada = arrayDeSapatos.filter((sapato)=> sapato.tipo===opcaoSelecionada)
 
   return (
@@ -24,7 +32,6 @@ export default function Produtos() {
         <section className=" hidden md:flex flex-col bg-zinc-50 rounded-lg shadow-lg h-fit w-[251px] text-base	text-stone-500 font-semibold">
             <form action="" className="">
                 {categorias.map((categoria, i) => (
-                    console.log(categoria===opcaoSelecionada),
                     <div className={`${opcaoSelecionada === categoria?"bg-slate-100 text-laranja" : ""} h-10 flex gap-4 items-center px-2 mx-2`} key={i}>
                     <input
                         type="radio"

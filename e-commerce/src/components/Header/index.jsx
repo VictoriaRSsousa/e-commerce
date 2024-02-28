@@ -1,6 +1,8 @@
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoMdSearch } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { MdClose } from "react-icons/md";
+
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
 import { PedidosContext } from "../../contexts/PedidosContext";
@@ -12,6 +14,7 @@ export default function Header() {
 
   const { compras, setCompras } = useContext(ComprasContext);
   const { pedidos, setPedidos } = useContext(PedidosContext);
+
   const somar = pedidos
     .filter((sapato) => sapato.qtd > 0)
     .map((sapato) => sapato.qtd * sapato.valor)
@@ -25,12 +28,16 @@ export default function Header() {
 
   const [cartTotal, setCartTotal] = useState(parseInt(localStorage.getItem("totalCart"))|| 0)
   const [search,setSearch] = useState("")
+  const [showCart, setShowCart] = useState(false)
+  const [showMenu,setShowMenu] = useState(false)
 
+  
   useEffect(() => {
-    localStorage.setItem("totalCart", totalCart);
-  }, [cartTotal]);
+    setCartTotal(cartTotal)
+    localStorage.setItem("totalCart", cartTotal);
+  }, [totalCart]);
 
-  function handleCart() {
+  function handleCart() {    
     setPedidos([]);
     setCartTotal(0);
   }
@@ -42,6 +49,8 @@ export default function Header() {
     setPedidos([])
 
   }
+ // console.log(totalCart);
+  console.log(cartTotal);
 
 
   function handleSearch(event){
@@ -49,11 +58,27 @@ export default function Header() {
 
   }
 
+  function handleShowCart(action){
+    if(action==="show"){
+      setShowCart(true)
+
+    }else{
+      setShowCart(false)
+    }
+  }
+  function handleShowMenu(action){
+    if(action==="show"){
+      setShowMenu(true)
+    }else{
+      setShowMenu(false)
+    }
+  }
+
   return (
     <>
       {/* ---------------------------------HEADER DESKTOP------------------------------------------------- */}
 
-      <section className="hidden md:flex mt-0">
+      <section className="hidden md:flex mt-0 ">
         <div className="bg-[#1E3A8A] w-full ">
           <main className="flex justify-around items-center h-36">
             <img
@@ -71,7 +96,7 @@ export default function Header() {
             </label>
             <article className="flex text-[white] fonr-semibold gap-5 items-center">
               <Link to="/cadastro">
-                <a className="">Cadastre-se</a>
+                <p className="">Cadastre-se</p>
               </Link>
 
               <Link to="/login">
@@ -83,25 +108,35 @@ export default function Header() {
               {/* ------------------------CART DESKTOP----------------------- */}
 
               <button className="peer">
-                <MdOutlineShoppingCart className="  h-6 w-6" />
+                <MdOutlineShoppingCart className="  h-6 w-6" onClick={()=>handleShowCart("show")} />
                 {totalCart > 0 ? (
                   <p className="absolute top-10 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">
                     {totalCart}
                   </p>
                 ) : null}
               </button>
-              {/* <Cart/> */}
-              <div className="flex flex-col justify-between h-96 w-64 p-8 bg-zinc-50 fixed peer-focus:right-0 top-0 z-50	right-[-100vw] font-semibold rounded-l-lg  duration-1000 out-in-ease  overflow-auto ">
+              {/* <Cart/> */}{
+                showCart?
+                <div className="flex-col justify-between h-96 w-64 p-8 bg-zinc-50 fixed right-0 flex top-0 	 font-semibold rounded-l-lg  duration-1000 out-in-ease  overflow-auto ">
                 <header>
-                  <h2 className="text-black">Meu Carrinho</h2>
+                  <div className="flex justify-between items-center"> 
+                    <h2 className="text-black">Meu Carrinho</h2>
+                    <MdClose className="h-7 w-7 text-black cursor-pointer" onClick={()=>handleShowCart("close")}/>
+
+                  </div>
                   <div className="border border-black"></div>
                 </header>
                 <div className="text-black flex flex-col gap-6	justify-around ">
                   {pedidos
                     .filter((sapato) => sapato.qtd > 0)
-                    .map((p) => (
-                      <CartCard key={pedidos.id} p={p} />
-                    ))}
+                    .map((pedido) =>
+                    
+                    {console.log(pedido)
+                      return(
+                      <div key={pedido.id}>
+                        <CartCard  p={pedido} />
+                      </div>
+                    )})}
                 </div>
                 <footer className="flex flex-col">
                   <div className="border border-black "></div>
@@ -110,22 +145,24 @@ export default function Header() {
                     {<p className="text-azul-escuro">{somar.toFixed(2)}</p> ||
                       0}
                   </article>
-                  <div className=" flex font-Inter justify-around items-center ">
-                    <a
+                  <div className=" flex font-Inter  justify-around items-center ">
+                    <button
                       onClick={handleCart}
-                      className="cursor-pointer text-stone-500 text-[10px]"
+                      className="cursor-pointer  text-stone-500  text-[10px]"
                     >
                       Esvaziar
-                    </a>
+                    </button>
                     <button
                       onClick={handleCompra}
-                      className="bg-azul-escuro text-white rounded-xl h-6 w-32 text-[10px] font-medium"
+                      className="bg-azul-escuro  text-white rounded-xl h-6 w-32 text-[10px] font-medium"
                     >
                       Finalizar Compra
                     </button>
                   </div>
                 </footer>
-              </div>
+              </div>:null
+              }
+ 
               {/* ---------------------------------------------------------------------------------- */}
             </article>
           </main>
@@ -174,11 +211,18 @@ export default function Header() {
         <header className="flex text-[white] justify-around ">
           {/* ----------------------MENU HAMBURGUER----------------------------------------------*/}
 
-          <button className="peer">
-            <GiHamburgerMenu className="h-6 w-7" />
+          <button className="">
+            <GiHamburgerMenu className="h-6 w-7" onClick={()=>handleShowMenu("show")} />
           </button>
-          <div className="h-96 w-64 p-8 bg-zinc-50 fixed peer-focus:left-0 top-0 z-50	 left-[-100vw] font-semibold rounded-r-lg  duration-1000	 out-in-ease">
-            <h2 className="text-black">Páginas</h2>
+
+          {
+             showMenu?
+            <div className="h-96 w-64 p-8 bg-zinc-50 fixed  top-0 z-50	 left-0 font-semibold rounded-r-lg  duration-1000	 out-in-ease">
+            <div className="flex justify-between items-center">
+              <h2 className="text-black">Páginas</h2>
+              <MdClose className="h-7 w-7 text-black cursor-pointer" onClick={()=>handleShowMenu("close")} />
+
+            </div>
             <nav className="text-black flex flex-col ">
               <div className="border border-black"></div>
               <Link
@@ -234,58 +278,68 @@ export default function Header() {
                 </button>
               </div>
             </footer>
-          </div>
-          <img
+          </div>:null
+          }
+
+          {/* <img
             src="../src/assets/images/logo.png"
             alt="logo e-rede"
             className="h-7 w-[72px]"
-          />
+          /> */}
 
           {/*-----------------------------------CART------------------------------------------- */}
 
-          <div className="relative">
+          <div className="">
             <button className="peer">
-              <MdOutlineShoppingCart className="  h-6 w-6" />
+              <MdOutlineShoppingCart className="  h-6 w-6" onClick={()=>handleShowCart("show")} />
               {totalCart > 0 ? (
                 <p className="absolute top-3 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">
                   {totalCart}
                 </p>
               ) : null}
+         
             </button>
-            <div className="flex flex-col justify-between h-96 w-64 p-8 bg-zinc-50 fixed peer-focus:right-0 top-0 z-50	right-[-100vw] font-semibold rounded-l-lg  duration-1000	 out-in-ease  overflow-auto ">
-              <header>
-                <h2 className="text-black">Meu Carrinho</h2>
-                <div className="border border-black"></div>
-              </header>
-              <div className="text-black flex flex-col gap-6	justify-around ">
-                {pedidos
-                  .filter((sapato) => sapato.qtd > 0)
-                  .map((p) => (
-                    <CartCard key={pedidos.id} p={p} />
-                  ))}
-              </div>
-              <footer className="flex flex-col gap-3">
-                <div className="border border-black "></div>
-                <article className="flex justify-between">
-                  <h2 className="text-black">Valor Total:</h2>
-                  {<p className="text-azul-escuro">{somar.toFixed(2)}</p> || 0}
-                </article>
-                <div className=" flex font-Inter justify-around items-center ">
-                  <a
-                    onClick={handleCart}
-                    className="cursor-pointer text-stone-500 text-[10px]"
-                  >
-                    Esvaziar
-                  </a>
-                  <button
-                    onClick={handleCompra}
-                    className="bg-azul-escuro text-white rounded-xl h-6 w-32 text-[10px] font-medium"
-                  >
-                    Finalizar Compra
-                  </button>
+            {
+                showCart?
+                <div className="flex flex-col justify-between h-96 w-64 p-8 bg-zinc-50 fixed right-0 top-0 z-50	 font-semibold rounded-l-lg  duration-1000	 out-in-ease  overflow-auto ">
+                <header>
+                  <div className="flex justify-between items-center">
+                  <h2 className="text-black">Meu Carrinho</h2>
+                  <MdClose className="h-7 w-7 text-black cursor-pointer" onClick={()=>handleShowCart("close")}/>
+                  </div>
+                  <div className="border border-black"></div>
+                </header>
+                <div className="text-black flex flex-col gap-6	justify-around ">
+                  {pedidos
+                    .filter((sapato) => sapato.qtd > 0)
+                    .map((p) => (
+                      <CartCard key={pedidos.id} p={p} />
+                    ))}
                 </div>
-              </footer>
-            </div>
+                <footer className="flex flex-col gap-3">
+                  <div className="border border-black "></div>
+                  <article className="flex justify-between">
+                    <h2 className="text-black">Valor Total:</h2>
+                    {<p className="text-azul-escuro">{somar.toFixed(2)}</p> || 0}
+                  </article>
+                  <div className=" flex font-Inter justify-around items-center ">
+                    <a
+                      onClick={handleCart}
+                      className="cursor-pointer text-stone-500 text-[10px]"
+                    >
+                      Esvaziar
+                    </a>
+                    <button
+                      onClick={handleCompra}
+                      className="bg-azul-escuro text-white rounded-xl h-6 w-32 text-[10px] font-medium"
+                    >
+                      Finalizar Compra
+                    </button>
+                  </div>
+                </footer>
+              </div>:null
+              }
+
           </div>
 
           {/* ------------------------------------------PLACEHOLDER------------------------------------------- */}

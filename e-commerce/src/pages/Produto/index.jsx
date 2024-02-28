@@ -34,7 +34,10 @@ export default function Produto() {
     }else
       setPedidos((preview)=>{
         const differentItems =  preview.filter((item)=>item.id!== sapato[0].id)
+        console.log(differentItems,"diferentes itens");
+        console.log(sapato);
         return [...differentItems , {...sapato[0], qtd: qtdItens}]
+        
         })
 
   }
@@ -53,13 +56,13 @@ useEffect(()=>{
     }
 },[pedidos])
 
-
+console.log(pedidos);
 
   return (
     <>
       <Header />
       {sapato.length>0?      <main className=" flex justify-center items-center  ">
-        <body className="	 flex flex-col md:flex-row  md:items-center mt-14 md:m-40 shadow-lg bg-slate-100 p-6 md:p-7 gap-2 md:gap-16 font-Inter">
+        <div className="	 flex flex-col md:flex-row  md:items-center mt-14 md:m-40 shadow-lg bg-slate-100 p-6 md:p-7 gap-2 md:gap-16 font-Inter">
           <section className="">
             <img
               src="https://m.media-amazon.com/images/I/71JtGDJmz7L._AC_SY741_.jpg"
@@ -94,7 +97,7 @@ useEffect(()=>{
               <button className="bg-azul-escuro text-white w-[222px] md:w-[352px] h-14	 md:h-20 rounded-lg font-semibold text-2xl" onClick={verifyItens}>Comprar</button>
             </article>
           </section>
-        </body>
+        </div>
       </main>:
         <Navigate to="*"/>
       }

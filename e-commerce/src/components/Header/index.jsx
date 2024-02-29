@@ -2,7 +2,6 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoMdSearch } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
-
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
 import { PedidosContext } from "../../contexts/PedidosContext";
@@ -10,7 +9,7 @@ import { ComprasContext } from "../../contexts/ComprasContext";
 import CartCard from "../CartCard";
 
 export default function Header() {
-  const loc = useLocation();
+  const loc = useLocation()
 
   const { compras, setCompras } = useContext(ComprasContext);
   const { pedidos, setPedidos } = useContext(PedidosContext);
@@ -19,6 +18,7 @@ export default function Header() {
     .filter((sapato) => sapato.qtd > 0)
     .map((sapato) => sapato.qtd * sapato.valor)
     .reduce((acc, atual) => acc + atual, 0);
+  
 
   const totalCart =
     pedidos
@@ -26,7 +26,7 @@ export default function Header() {
       .map((sapato) => sapato.qtd)
       .reduce((acc, atual) => acc + atual, 0) 
 
-  const [cartTotal, setCartTotal] = useState(parseInt(localStorage.getItem("totalCart"))|| 0)
+  const [cartTotal, setCartTotal] = useState( parseInt(localStorage.getItem("cartTotal")))
   const [search,setSearch] = useState("")
   const [showCart, setShowCart] = useState(false)
   const [showMenu,setShowMenu] = useState(false)
@@ -34,13 +34,14 @@ export default function Header() {
   
   useEffect(() => {
     setCartTotal(cartTotal)
-    localStorage.setItem("totalCart", cartTotal);
-  }, [totalCart]);
+    localStorage.setItem("cartTotal", totalCart);
+  }, [cartTotal]);
 
   function handleCart() {    
     setPedidos([]);
     setCartTotal(0);
   }
+  
   function handleCompra() {
     setCompras((preview)=>{
       //const differentItems =  preview.filter((item)=>item.id!==pedidos.id)
@@ -49,13 +50,12 @@ export default function Header() {
     setPedidos([])
 
   }
- // console.log(totalCart);
-  console.log(cartTotal);
+  console.log(totalCart,"variavel");
+  console.log(cartTotal,"estado");
 
 
   function handleSearch(event){
     setSearch(event.target.value)
-
   }
 
   function handleShowCart(action){
@@ -109,9 +109,9 @@ export default function Header() {
 
               <button className="peer">
                 <MdOutlineShoppingCart className="  h-6 w-6" onClick={()=>handleShowCart("show")} />
-                {totalCart > 0 ? (
+                {cartTotal > 0 ? (
                   <p className="absolute top-10 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">
-                    {totalCart}
+                    {cartTotal}
                   </p>
                 ) : null}
               </button>
@@ -292,9 +292,9 @@ export default function Header() {
           <div className="">
             <button className="peer">
               <MdOutlineShoppingCart className="  h-6 w-6" onClick={()=>handleShowCart("show")} />
-              {totalCart > 0 ? (
+              {cartTotal > 0 ? (
                 <p className="absolute top-3 bg-red-600  text-[16px] rounded-full h-6 w-6 justify-center items-center flex">
-                  {totalCart}
+                  {cartTotal}
                 </p>
               ) : null}
          

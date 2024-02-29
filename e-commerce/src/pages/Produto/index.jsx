@@ -9,14 +9,13 @@ import { PedidosContext } from "../../contexts/PedidosContext";
 
 //FALTA APAGAR A QUANTIDADE DE ITENS DO LOCALSTORAGE
 
+
 export default function Produto() {
   const { id } = useParams();
   const sapato = arrayDeSapatos.filter((sapato)=>sapato.id ==parseInt(id))
 
   const {pedidos,setPedidos} = useContext(PedidosContext)
-  const [qtdItens, setqtdItens] = useState(parseInt(localStorage.getItem(`${sapato.id}`))|| 0)
-
-
+  const [qtdItens, setqtdItens] = useState(parseInt(localStorage.getItem(`${sapato[0].id}`))|| 0)
 
 
   function handleQtdItens(action){
@@ -34,14 +33,12 @@ export default function Produto() {
     }else
       setPedidos((preview)=>{
         const differentItems =  preview.filter((item)=>item.id!== sapato[0].id)
-        console.log(differentItems,"diferentes itens");
-        console.log(sapato);
         return [...differentItems , {...sapato[0], qtd: qtdItens}]
         
         })
 
   }
-  
+
     
   useEffect(()=>{
       
@@ -50,17 +47,16 @@ export default function Produto() {
     }
 },[qtdItens])
 
-useEffect(()=>{
+  useEffect(()=>{
     if(pedidos.length===0){
       setqtdItens(0)
     }
-},[pedidos])
+  },[pedidos.length])
 
-console.log(pedidos);
 
   return (
     <>
-      <Header />
+      <Header/>
       {sapato.length>0?      <main className=" flex justify-center items-center  ">
         <div className="	 flex flex-col md:flex-row  md:items-center mt-14 md:m-40 shadow-lg bg-slate-100 p-6 md:p-7 gap-2 md:gap-16 font-Inter">
           <section className="">

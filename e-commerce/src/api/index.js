@@ -21,3 +21,29 @@ export  const arrayDeSapatos = [
     {id:20, modelo: 'Clarks Desert Boot', tipo: 'Botas', valor: 129.99 , categoria:'b', quantidade:10 , descricao:"xxxxxxxx  x x x x x  xxx x x xxxxxxx xxxxx xxxxxxx xxxxxx xxxxxx x"}
     // Adicione mais objetos conforme necessário
   ];
+
+  const baseURL = "http://localhost:3000"
+const api ={
+    getContentOnlyIfAuth: async()=>{
+        const token = localStorage.getItem("token")
+        return fetch(`${baseURL}/recurso-protegido`,
+        {
+            method:"GET",
+            headers:{
+                "Authorization":`Bearer `
+            }
+        })
+    },
+    postLogin: async(username, password)=>{
+        console.log(username, password)
+        return fetch(`${baseURL}/login`,{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({username:username, password:password})
+        })
+    }
+}
+export default api
+  

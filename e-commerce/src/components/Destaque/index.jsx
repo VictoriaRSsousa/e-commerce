@@ -32,12 +32,12 @@ export default function Destaque(props){
         <main className="shadow-md rounded">
 
         <section>
-            <img src="../src/assets/images/shoes.png" alt="" className="w-full" />
+            <img src={props.sapato.image} alt="" className="w-full" />
         </section>
         <section className="p-2 h-40 w-fit flex flex-col justify-between text-wrap " >
             <div>
                 <p className="text-[#1E3A8A] text-Inter font-bold text-wrap 	">{props.sapato.model}</p>
-                <p className="text-[#DDDDDD] font-medium	w-fit ">{props.sapato.categorie}</p>
+                <p className="text-[#DDDDDD] font-medium	w-fit ">{props.sapato.product_categorie_id}</p>
                 <p className="text-[#EA580C] font-semibold">{props.sapato.price}</p>
                 
             </div>

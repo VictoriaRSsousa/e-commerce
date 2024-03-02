@@ -1,27 +1,38 @@
 import Destaque from "../../components/Destaque";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { arrayDeSapatos, getProducts } from "../../api";
+import api from "../../api";
 import { useEffect, useState } from "react";
 
 
 
 export default function Home(){  
     const [products,setProducts] = useState([])
-        useEffect(() => {
-            // declare the data fetching function
-            const fetchData = async () => {
-              const data = await fetch('http://localhost:3000/products');
-              const result = await data.json()
-              setProducts(result)
-              console.log(result);
-            }    
-            // call the function
-            fetchData()
-              // make sure to catch any error
-              .catch(console.error);
-          }, [])
-          console.log(products);
+
+    async function handleApi(){
+        const response = await api.getProducts()
+        const result = await response.json()
+        setProducts(result)
+        console.log(products);
+    }
+
+    useEffect(()=>{
+        handleApi()
+    },[])
+        // useEffect(() => {
+        //     // declare the data fetching function
+        //     const fetchData = async () => {
+        //       const data = await fetch('http://localhost:3000/products');
+        //       const result = await data.json()
+        //       setProducts(result)
+        //       console.log(result);
+        //     }    
+        //     // call the function
+        //     fetchData()
+        //       // make sure to catch any error
+        //       .catch(console.error);
+        //   }, [])
+
 
 
     return(

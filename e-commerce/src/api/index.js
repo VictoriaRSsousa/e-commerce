@@ -47,12 +47,22 @@ export  const arrayDeSapatos = [
 //         })
 //     }
 // }
-export const getProducts = async () =>{
-    const response = await fetch("http://localhost:3000/products");
-    const products = await response.json();
+const baseUrl = "http://localhost:3000"
+// export const getProducts = async () =>{
+//     const response = await fetch(`${baseUrl}/products`);
+//     const products = await response.json();
 
-    return products;
+//     return products;
+//  }
+
+ const api={
+  getProducts: async () =>{
+    return  fetch(`${baseUrl}/products`);
+ },
+ getCategories: async ()=>{
+  return fetch(`${baseUrl}/categories`)
  }
+}
 // // 
-// export default api
+ export default api
   

@@ -1,3 +1,5 @@
+import { json } from "react-router-dom";
+
 export  const arrayDeSapatos = [
     {id:1,modelo: 'Nike Air Force 1', tipo: 'Casual', valor: 199.99, categoria:'a', quantidade:10 , descricao:"xxxxxxxx  x x x x x  xxx x x xxxxxxx xxxxx xxxxxxx xxxxxx xxxxxx x"},
     {id:2, modelo: 'Adidas Ultraboost', tipo: 'Corrida', valor: 179.99, categoria:'b' , quantidade:10, descricao:"xxxxxxxx  x x x x x  xxx x x xxxxxxx xxxxx xxxxxxx xxxxxx xxxxxx x" },
@@ -22,28 +24,35 @@ export  const arrayDeSapatos = [
     // Adicione mais objetos conforme necessário
   ];
 
-  const baseURL = "http://localhost:3000"
-const api ={
-    getContentOnlyIfAuth: async()=>{
-        const token = localStorage.getItem("token")
-        return fetch(`${baseURL}/recurso-protegido`,
-        {
-            method:"GET",
-            headers:{
-                "Authorization":`Bearer `
-            }
-        })
-    },
-    postLogin: async(username, password)=>{
-        console.log(username, password)
-        return fetch(`${baseURL}/login`,{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify({username:username, password:password})
-        })
-    }
-}
-export default api
+//   const baseURL = "http://localhost:3000"
+//   const api ={
+//     getProducts: async()=>{
+//         //const token = localStorage.getItem("token")
+//         return fetch(`${baseURL}/products`,
+//         {
+//            method:"GET",
+// //             headers:{
+// //                 "Authorization":`Bearer `
+// //             }
+//         })
+//     },
+//     postLogin: async(username, password)=>{
+//         console.log(username, password)
+//         return fetch(`${baseURL}/login`,{
+//             method:"POST",
+//             headers:{
+//                 "Content-Type":"application/json"
+//             },
+//             body:JSON.stringify({username:username, password:password})
+//         })
+//     }
+// }
+export const getProducts = async () =>{
+    const response = await fetch("http://localhost:3000/products");
+    const products = await response.json();
+
+    return products;
+ }
+// // 
+// export default api
   

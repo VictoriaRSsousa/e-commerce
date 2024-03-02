@@ -1,11 +1,27 @@
 import Destaque from "../../components/Destaque";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { arrayDeSapatos } from "../../api";
+import { arrayDeSapatos, getProducts } from "../../api";
+import { useEffect, useState } from "react";
 
 
 
 export default function Home(){  
+    const [products,setProducts] = useState([])
+        useEffect(() => {
+            // declare the data fetching function
+            const fetchData = async () => {
+              const data = await fetch('http://localhost:3000/products');
+              const result = await data.json()
+              setProducts(result)
+              console.log(result);
+            }    
+            // call the function
+            fetchData()
+              // make sure to catch any error
+              .catch(console.error);
+          }, [])
+          console.log(products);
 
 
     return(
@@ -20,7 +36,7 @@ export default function Home(){
                 <h2 className="text-azul-escuro mb-5 md:mb-6  ml-3 md:ml-5 text-Inter font-semibold text-xl">Destaques</h2>
                 <div className="grid grid-cols-2 md:grid-cols-6 gap-2 md:gap-10">
                     
-                {arrayDeSapatos.filter((sapato)=>sapato.id<13).map((sapato)=>(<Destaque key={sapato.id} sapato={sapato}/>))}
+                {products.map((sapato)=>(<Destaque key={sapato.product_id} sapato={sapato}/>))}
                 </div>
             </section>
 

@@ -37,7 +37,7 @@ export default function Destaque(props){
         <section className="p-2 h-40 w-fit flex flex-col justify-between text-wrap " >
             <div>
                 <p className="text-[#1E3A8A] text-Inter font-bold text-wrap 	">{props.sapato.model}</p>
-                <p className="text-[#DDDDDD] font-medium	w-fit ">{props.sapato.product_categorie_id}</p>
+                <p className="text-[#DDDDDD] font-medium	w-fit ">{props.sapato.categorie}</p>
                 <p className="text-[#EA580C] font-semibold">{props.sapato.price}</p>
                 
             </div>

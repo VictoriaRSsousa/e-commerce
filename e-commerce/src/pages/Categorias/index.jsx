@@ -23,6 +23,8 @@ export default function Categorias(){
     // const allCategorias = arrayDeSapatos.map((sapato) => sapato.tipo);
     // const categorias = [...new Set(allCategorias)];
     
+
+    //RESPONSIVO
     return(
     
         <>

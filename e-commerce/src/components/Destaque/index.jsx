@@ -29,12 +29,12 @@ export default function Destaque(props){
 
     return(
         <>
-        <main className="shadow-md rounded">
+        <main className="shadow-md rounded w-[45vw] md:w-[12vw]">
 
         <section>
-            <img src={props.sapato.image} alt="" className="w-full" />
+            <img src={props.sapato.image} alt="" className="w-full h-32" />
         </section>
-        <section className="p-2 h-40 w-fit flex flex-col justify-between text-wrap " >
+        <section className="p-2 h-40 w-auto flex flex-col justify-between text-wrap " >
             <div>
                 <p className="text-[#1E3A8A] text-Inter font-bold text-wrap 	">{props.sapato.model}</p>
                 <p className="text-[#DDDDDD] font-medium	w-fit ">{props.sapato.categorie}</p>

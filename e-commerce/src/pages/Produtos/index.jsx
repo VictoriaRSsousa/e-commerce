@@ -2,39 +2,35 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import api  from "../../api";
 import Destaque from "../../components/Destaque";
-import { useState,useEffect } from "react";
+import { useState,useEffect,useContext } from "react";
 import { useLocation, useParams } from "react-router-dom";
+import { ProdutosContext } from "../../contexts/ProdutosContext";
 
 export default function Produtos() {
 
-  
+  const {produtos , setProdutos} = useContext(ProdutosContext)
+  console.log(produtos);
   
   const search = useLocation().search.slice(11)
+  
 
   const [opcaoSelecionada, setOpcaoSelecionada] = useState(search);
   const [categories,setCategories] = useState([])
-  const [products,setProducts] = useState([])
-  
+  console.log(opcaoSelecionada);
 
   async function handleApi(){
       const response = await api.getCategories()
       const result = await response.json()
-      const res = await api.getProducts()
-      const prod = await res.json()
-      setProducts(prod)
       setCategories(result)
-      console.log(products);
-
+      console.log(result);
+      console.log(categories);
       
   }
 
   useEffect(()=>{
       handleApi()
   },[])
-
   
-
-
 
   function handleOpcaoChange(event) {
     setOpcaoSelecionada(event.target.value);
@@ -44,8 +40,7 @@ export default function Produtos() {
   // const allCategorias = arrayDeSapatos.map((sapato) => sapato.tipo);
   // const categorias = [...new Set(allCategorias)];
   // console.log(categorias);
-  const categoriasSelecionada = products.filter((product)=> product.product_categorie_id===opcaoSelecionada)
-  console.log(categoriasSelecionada);
+   const categoriasSelecionada = produtos.filter((product)=> product.categorie===opcaoSelecionada)
 
   return (
     <>
@@ -89,7 +84,7 @@ export default function Produtos() {
         <section className=" grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-10 p-5 md:p-2">
           {opcaoSelecionada?
             categoriasSelecionada.map((sapato) => (
-            <Destaque sapato={sapato} key={sapato.id} />)):products.map((product) => (
+            <Destaque sapato={sapato} key={sapato.id} />)):produtos.map((product) => (
                 <Destaque sapato={product} key={product.product_id} />))
           }
        

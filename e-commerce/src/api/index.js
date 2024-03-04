@@ -61,6 +61,9 @@ const baseUrl = "http://localhost:3000"
  },
  getCategories: async ()=>{
   return fetch(`${baseUrl}/categories`)
+ },
+ getProductsByCategorie: async() =>{
+  return fetch(`${baseUrl}/categories`)
  }
 }
 // // 

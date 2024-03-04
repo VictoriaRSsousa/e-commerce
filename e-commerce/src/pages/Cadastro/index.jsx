@@ -1,21 +1,37 @@
 import { Link } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect ,useState} from "react";
 import { UsersContext } from "../../contexts/UserContext";
+import api from "../../api";
 export default function Cadastro() {
-  const {user, setUser} = useContext(UsersContext);
+  // const {user, setUser} = useContext(UsersContext);
+
+  const [user,setUser] = useState({name:"",email:"", password:""})
+
+  async function handleCadastro(){
+    const response = await api.cadastro(user.name,user.email,user.password)
+    const result = await response.json()
+    console.log(result, "cadastro");
+    alert(result.message)
+    
+ 
+  } 
+
+
+  console.log(user);
+
 
   function handleform(event) {
     setUser((preview) => ({
       ...preview,
       [event.target.name]: event.target.value,
     }));
-    console.log(user);
+    // console.log(user);
   }
   function handleSubmit(event) {
     //para n ter o comportamento padrao do formulario e recarregar a pagina
     event.preventDefault();
-    // setUser({ name: "", email: "",password:""});
-    console.log(user.name)
+     setUser({name: "", email: "",password:""});
+    // console.log(user.name)
   }
 
   useEffect(()=>{
@@ -64,14 +80,15 @@ export default function Cadastro() {
             <button
               type="submit"
               className="bg-laranja text-white rounded-lg h-14 w-64 px-5 "
+              onClick={handleCadastro}
             >
               Cadastrar
             </button>
           </form>
           <span className="flex gap-2">
             <p>Ja possui Cadastro? </p>
-            <Link to="/login">
-              <a className="text-laranja"> Clique aqui</a>
+            <Link to="/login" className="text-laranja">
+              Clique aqui
             </Link>
           </span>
         </div>

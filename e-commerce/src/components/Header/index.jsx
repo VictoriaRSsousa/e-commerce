@@ -2,10 +2,11 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoMdSearch } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
-import { Link, useLocation } from "react-router-dom";
+import { Link, json, useLocation } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
 import { PedidosContext } from "../../contexts/PedidosContext";
 import { ComprasContext } from "../../contexts/ComprasContext";
+import { UsersContext } from "../../contexts/UserContext";
 import CartCard from "../CartCard";
 
 export default function Header() {
@@ -13,6 +14,8 @@ export default function Header() {
 
   const { compras, setCompras } = useContext(ComprasContext);
   const { pedidos, setPedidos } = useContext(PedidosContext);
+  const {user,setUser} = useContext(UsersContext)
+  const name = user.name 
 
   const somar = pedidos
     .filter((sapato) => sapato.qtd > 0)
@@ -74,6 +77,13 @@ export default function Header() {
     }
   }
 
+  function handleSair(){
+
+    localStorage.removeItem("token")
+    localStorage.removeItem("user")
+    //setUser({})
+  }
+
   return (
     <>
       {/* ---------------------------------HEADER DESKTOP------------------------------------------------- */}
@@ -95,6 +105,14 @@ export default function Header() {
               />
             </label>
             <article className="flex text-[white] fonr-semibold gap-5 items-center">
+              {
+                user.idUser?
+                <div className="flex ml-4 gap-5 items-center">
+                  <p>Olá, {name}</p>
+                  <button onClick={handleSair} className="text-white bg-laranja w-20 h-10 rounded-lg "> Sair </button>
+                </div>:
+
+              <div className="flex gap-10 items-center">
               <Link to="/cadastro">
                 <p className="">Cadastre-se</p>
               </Link>
@@ -104,6 +122,9 @@ export default function Header() {
                   Entrar
                 </button>
               </Link>
+
+              </div>
+              }
 
               {/* ------------------------CART DESKTOP----------------------- */}
 
@@ -281,11 +302,11 @@ export default function Header() {
           </div>:null
           }
 
-          {/* <img
+           <img
             src="../src/assets/images/logo.png"
             alt="logo e-rede"
             className="h-7 w-[72px]"
-          /> */}
+          /> 
 
           {/*-----------------------------------CART------------------------------------------- */}
 

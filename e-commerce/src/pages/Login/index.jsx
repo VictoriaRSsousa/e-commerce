@@ -1,12 +1,32 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { UsersContext } from "../../contexts/UserContext";
 import { useContext } from "react"
+import api from "../../api";
 
 
 export default function Login() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
-  const {user} = useContext(UsersContext);
+  const {user,setUser} = useContext(UsersContext);
+
+  const navigate = useNavigate();
+
+  async function handleLogin(){
+    const response = await api.login(userLogin.email,userLogin.password)
+    const result = await response.json()
+    console.log(result);
+    if(!result.value){
+      return alert(result)
+    }
+
+    setUser({name:result.value.nameUser,email:result.value.emailUser,idUser:result.value.idUser})
+    console.log(user);
+    localStorage.setItem("token",result.token)
+    navigate('/')
+    console.log(user);
+
+ 
+  } 
 
 
   function handleSubmit(event) {
@@ -18,15 +38,14 @@ export default function Login() {
   function handleInfoChanges(event) {
     setUserLogin({ ...userLogin, [event.target.name]: event.target.value });
   }
-  console.log(user.password);
-  function handleButton() {
+  // function handleButton() {
 
-    if (userLogin.email===user.email && userLogin.password===user.password){
-        console.log("passou")
-    }else{
-        console.log("nao passou");
-    }
-  }
+  //   if (userLogin.email===user.email && userLogin.password===user.password){
+  //       console.log("passou")
+  //   }else{
+  //       console.log("nao passou");
+  //   }
+  // }
   return (
     <main className="flex flex-col md:flex-row relative items-center   font-Inter text-base ">
       <section className="h-3/4 md:h-screen md:w-1/2  md:bg-slate-100 absolute md:relative mt-20 md:mt-0   flex items-center justify-center">
@@ -63,15 +82,15 @@ export default function Login() {
             <button
               type="submit"
               className="bg-laranja text-white rounded-lg h-14 w-64 px-5  "
-              onClick={handleButton}
+              onClick={handleLogin}
             >
               Fazer Login
             </button>
           </form>
           <span className="flex gap-2">
             <p>Não possui Cadastro? </p>
-            <Link to="/cadastro">
-              <a className="text-laranja"> Clique aqui</a>
+            <Link to="/cadastro" className="text-laranja">
+              Clique aqui
             </Link>
           </span>
         </div>

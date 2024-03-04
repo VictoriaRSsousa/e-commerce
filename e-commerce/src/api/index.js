@@ -64,6 +64,22 @@ const baseUrl = "http://localhost:3000"
  },
  getProductsByCategorie: async() =>{
   return fetch(`${baseUrl}/categories`)
+ },
+ login: async(email,password) => {
+  return fetch(`${baseUrl}/login`,{
+    method:"POST",
+    headers:{
+    "Content-Type":"application/json"},
+    body:JSON.stringify({email,password})
+            })
+ },
+ cadastro: async(name,email,password) => {
+  return fetch(`${baseUrl}/cadastro`,{
+    method:"POST",
+    headers:{
+    "Content-Type":"application/json"},
+    body:JSON.stringify({name,email, password})
+            })
  }
 }
 // // 

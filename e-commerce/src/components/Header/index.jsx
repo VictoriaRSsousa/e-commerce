@@ -16,7 +16,7 @@ export default function Header() {
   const { compras, setCompras } = useContext(ComprasContext);
   const { pedidos, setPedidos } = useContext(PedidosContext);
   const {user,setUser} = useContext(UsersContext)
-  const name = user.name 
+  const name = user?.name 
 
   const somar = pedidos
     .filter((sapato) => sapato.qtd > 0)
@@ -82,8 +82,15 @@ export default function Header() {
     //setUser({})
   }
 
+  const {product_id, price, qtd} = pedidos
+  console.log(pedidos,"pedidos header");
+  
+  const pedidosCompra = pedidos.map((pedido)=>{
+    return {sale_product_id:pedido.product_id,price:pedido.price,qtd_sale:pedido.qtd}
+  })
+  console.log(pedidosCompra);
   async function handleCompra(){
-    const response = await api.compra(user.idUser,pedidos)
+    const response = await api.compra(user.idUser,pedidosCompra)
     const result = await response.json()
     console.log(result);
 
@@ -112,7 +119,7 @@ export default function Header() {
             </label>
             <article className="flex text-[white] fonr-semibold gap-5 items-center">
               {
-                user.idUser?
+                user?
                 <div className="flex ml-4 gap-5 items-center">
                   <p>Olá, {name}</p>
                   <button onClick={handleSair} className="text-white bg-laranja w-20 h-10 rounded-lg "> Sair </button>

@@ -12,9 +12,9 @@ export default function CardPedido(props) {
               className="w-20 h-[70px] object-cover rounded-lg	"
             />
             <div>
-              <p className="text-sm">{props.compra.pedido[0].modelo}</p>
-              <p className="text-[10px] text-stone-500 mb-[6px]">{props.compra.pedido[0].tipo}</p>
-              <p className="text-xs text-black md:text-laranja"> {props.compra.total} </p>
+              <p className="text-sm"></p>
+              <p className="text-[10px] text-stone-500 mb-[6px]"></p>
+              <p className="text-xs text-black md:text-laranja"> </p>
             </div>
           </div>
         </section>

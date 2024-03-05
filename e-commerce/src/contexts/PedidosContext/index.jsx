@@ -4,6 +4,7 @@ export const PedidosContext = createContext([])
 
 export default function PedidosProvider({children}){
     const [pedidos, setPedidos] = useState(  [])
+    console.log(pedidos);
     //JSON.parse(localStorage.getItem("cart")) ||
 
     // useEffect(() => {

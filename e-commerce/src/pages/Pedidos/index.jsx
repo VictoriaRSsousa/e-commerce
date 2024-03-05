@@ -4,28 +4,73 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { useEffect, useState,useContext } from "react"; 
 import { ComprasContext } from "../../contexts/ComprasContext";
+import { UsersContext } from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
+import api from "../../api";
+import { ProdutosContext } from "../../contexts/ProdutosContext";
 
 
 export default function Pedidos(){
     const [opcaoSelecionada, setOpcaoSelecionada] = useState("");
+    const [datasVendas, setDataVendas] = useState()
 
+    const [showCompra, setShowCompra] = useState([])
+    const {produtos,setProdutos} = useContext(ProdutosContext)
+
+    
+    
     const { compras, setCompras } = useContext(ComprasContext);
+    const navigate = useNavigate()
+    const {user} = useContext(UsersContext)
     console.log(compras);
-
+    
     function handleOpcao(event){
         setOpcaoSelecionada(event.target.value)
-        console.log(event.target.value)
-        console.log(opcaoSelecionada);
     }
+    
+    
+    
+    async function handleCompras(){
+        const response = await api.listarCompra()
+        const result = await response.json()
+        const datas = result.map((datas)=> datas.data_da_venda)
+ //       const venda = result.map((venda)=>venda.sales)
+        setDataVendas(datas)
+        setShowCompra(result)
+        console.log(showCompra,"state")   
+            
+        }
+        useEffect(()=>{
+            
+        },[showCompra])
+        
+        useEffect(()=>{
+            handleCompras()
+        },[])
+        
+        useEffect(()=>{
+            
+        },[opcaoSelecionada])
+        
+        
+        //tela de logar
+        
+        useEffect(()=>{
+            if(!user){
+                console.log("nao tem");
+                navigate('/login')
+            }
+            
+            
+        },[])
+    
 
-    useEffect(()=>{
+//     <details>
+//   <summary>Details</summary>
+//   Something small enough to escape casual notice.
+// </details>
 
-    },[opcaoSelecionada])
-
- 
-    function teste(){
-        console.log(testeeeee);
-    }
+console.log(showCompra,"log");
 
     return(
         <>
@@ -57,6 +102,27 @@ export default function Pedidos(){
                                         <p className="hidden md:flex">Meus Pedidos</p>
                                     </span>
                                 </div>
+                                {
+                                    // produtos.map((sapato)=>(<Destaque key={sapato.product_id} sapato={sapato}/>))
+                                    //map no resultado da requisição 
+                                    // em cada map tenho data e venda
+                                    //faço um outro map para percorrer as vendas
+                                    showCompra?
+                                    showCompra.map((data,index)=>{
+                                        console.log(data);
+                                        return (
+                                        <details key={index}>
+                                            <summary>{data.data_da_venda}</summary>
+                                            {data.sales.map((sale)=> (
+                                                <div key={sale.sale_id}>
+                                                    <CardPedido  p={sale}/>
+                                                </div>
+                                            )
+                                            )}
+                                            
+                                        </details>)}):null
+
+                                }
     {/* {pedidos
     // .filter((sapato) => sapato.qtd > 0)
     // .map((p) => (

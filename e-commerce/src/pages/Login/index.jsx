@@ -8,6 +8,7 @@ import api from "../../api";
 export default function Login() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
   const {user,setUser} = useContext(UsersContext);
+  const { setToken} = useContext(UsersContext)
 
   const navigate = useNavigate();
 
@@ -17,7 +18,8 @@ export default function Login() {
     if(!result.value){
       return alert(result)
     }
-    localStorage.setItem("token",result.token)
+   // localStorage.setItem("token",result.token)
+   setToken(result.token)
     setUser({name:result.value.nameUser,email:result.value.emailUser,idUser:result.value.idUser})
 
     navigate('/')

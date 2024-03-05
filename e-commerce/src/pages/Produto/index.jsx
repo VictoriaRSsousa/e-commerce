@@ -37,6 +37,8 @@ export default function Produto() {
       setPedidos((preview)=>{
         const differentItems =  preview.filter((item)=>{
           return item.product_id!== produto[0].product_id})
+          console.log(produto[0]);
+        const {product_id, qtd,price, image} = produto[0]
         return [...differentItems , {...produto[0], qtd: qtdItens}]
         
         })

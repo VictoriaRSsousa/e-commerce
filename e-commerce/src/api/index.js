@@ -47,6 +47,9 @@ export  const arrayDeSapatos = [
 //         })
 //     }
 // }
+
+
+
 const baseUrl = "http://localhost:3000"
 // export const getProducts = async () =>{
 //     const response = await fetch(`${baseUrl}/products`);
@@ -54,6 +57,7 @@ const baseUrl = "http://localhost:3000"
 
 //     return products;
 //  }
+//const token = localStorage.getItem("token")
 
  const api={
   getProducts: async () =>{
@@ -82,13 +86,29 @@ const baseUrl = "http://localhost:3000"
             })
  },
  compra: async(sale_user_id,products) =>{
-  return fetch(`${baseUrl}/cadastro`,{
+  const token = localStorage.getItem("token")
+  //console.log(...arguments);
+  return fetch(`${baseUrl}/sales`,{
+    
     method:"POST",
     headers:{
-      token,
+    "Authorization": token,
     "Content-Type":"application/json"},
     body:JSON.stringify({sale_user_id,products})
  })
+},
+
+listarCompra: async()=>{
+  const token = localStorage.getItem("token")
+return fetch(`${baseUrl}/sales`,{
+    
+  method:"GET",
+  headers:{
+  "Authorization": token,
+  "Content-Type":"application/json"},
+  
+})
+  
 }
  }
 

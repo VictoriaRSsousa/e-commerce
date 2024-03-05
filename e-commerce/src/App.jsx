@@ -20,15 +20,16 @@ function App() {
         <Route path="/" element={<Home/>}/>
         <Route path="/login/" element={<Login/>}/>
         <Route path="/cadastro/" element={<Cadastro/>}/>
-        {
-          user &&
-          <Route path="/pedidos/" element={<Pedidos/>}/>
-        }
+        
+          
+          
+        <Route path="/pedidos/" element={<Pedidos/>}/>
+        
         <Route path="/produtos/" element={<Produtos/>}/>
         <Route path="/categorias/" element={<Categorias/>}/>
         <Route path="/produto/:id" element={<Produto/>}/>
 
-        <Route path="*" element={<div>Pagina nao encontrada</div>}/>
+        {/* <Route path="*" element={<div>Pagina nao encontrada</div>}/> */}
  
       </Routes>
     </BrowserRouter>

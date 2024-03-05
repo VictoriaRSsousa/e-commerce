@@ -18,7 +18,7 @@ export default function Produto() {
   const produto = produtos.filter((produto)=>produto.product_id ==parseInt(id))
   console.log(produto[0]);
   const {pedidos,setPedidos} = useContext(PedidosContext)
-  const [qtdItens, setqtdItens] = useState(parseInt( 0))
+  const [qtdItens, setqtdItens] = useState(0)
 
 
   function handleQtdItens(action){
@@ -35,26 +35,15 @@ export default function Produto() {
       alert('Quantidade Indisponível!')
     }else
       setPedidos((preview)=>{
-        const differentItems =  preview.filter((item)=>item.id!== produto[0].product_id)
+        const differentItems =  preview.filter((item)=>{
+          return item.product_id!== produto[0].product_id})
         return [...differentItems , {...produto[0], qtd: qtdItens}]
         
         })
 
   }
 
-    
-  useEffect(()=>{
-      
-    if(qtdItens>0){
-        localStorage.setItem(`${produto[0].product_id}`,qtdItens)
-    }
-},[qtdItens])
 
-  useEffect(()=>{
-    if(pedidos.length===0){
-      setqtdItens(0)
-    }
-  },[pedidos.length])
 
 
   return (

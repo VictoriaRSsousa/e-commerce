@@ -80,8 +80,19 @@ const baseUrl = "http://localhost:3000"
     "Content-Type":"application/json"},
     body:JSON.stringify({name,email, password})
             })
- }
+ },
+ compra: async(sale_user_id,products) =>{
+  return fetch(`${baseUrl}/cadastro`,{
+    method:"POST",
+    headers:{
+      token,
+    "Content-Type":"application/json"},
+    body:JSON.stringify({sale_user_id,products})
+ })
 }
+ }
+
+
 // // 
  export default api
   

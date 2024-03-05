@@ -5,6 +5,7 @@ import Header from "../../components/Header";
 import { useEffect, useState,useContext } from "react"; 
 import { ComprasContext } from "../../contexts/ComprasContext";
 
+
 export default function Pedidos(){
     const [opcaoSelecionada, setOpcaoSelecionada] = useState("");
 

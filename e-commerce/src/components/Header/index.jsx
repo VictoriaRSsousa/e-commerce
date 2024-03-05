@@ -8,6 +8,7 @@ import { PedidosContext } from "../../contexts/PedidosContext";
 import { ComprasContext } from "../../contexts/ComprasContext";
 import { UsersContext } from "../../contexts/UserContext";
 import CartCard from "../CartCard";
+import api from "../../api";
 
 export default function Header() {
   const loc = useLocation()
@@ -19,7 +20,7 @@ export default function Header() {
 
   const somar = pedidos
     .filter((sapato) => sapato.qtd > 0)
-    .map((sapato) => sapato.qtd * sapato.valor)
+    .map((sapato) => sapato.qtd * sapato.price)
     .reduce((acc, atual) => acc + atual, 0);
   
 
@@ -45,17 +46,14 @@ export default function Header() {
     setCartTotal(0);
   }
   
-  function handleCompra() {
-    setCompras((preview)=>{
-      //const differentItems =  preview.filter((item)=>item.id!==pedidos.id)
-      return [{pedido:pedidos,total:somar}]
-               });
-    setPedidos([])
+  // function handleCompra() {
+  //   setCompras((preview)=>{
+  //     //const differentItems =  preview.filter((item)=>item.id!==pedidos.id)
+  //     return [{pedido:pedidos,total:somar}]
+  //              });
+  //   setPedidos([])
 
-  }
-  console.log(totalCart,"variavel");
-  console.log(cartTotal,"estado");
-
+  // }
 
   function handleSearch(event){
     setSearch(event.target.value)
@@ -82,6 +80,14 @@ export default function Header() {
     localStorage.removeItem("token")
     localStorage.removeItem("user")
     //setUser({})
+  }
+
+  async function handleCompra(){
+    const response = await api.compra(user.idUser,pedidos)
+    const result = await response.json()
+    console.log(result);
+
+ 
   }
 
   return (
@@ -154,7 +160,7 @@ export default function Header() {
                     
                     {console.log(pedido)
                       return(
-                      <div key={pedido.id}>
+                      <div key={pedido.product_id}>
                         <CartCard  p={pedido} />
                       </div>
                     )})}

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UsersContext } from "../../contexts/UserContext";
 import { useContext } from "react"
 import api from "../../api";
@@ -14,19 +14,16 @@ export default function Login() {
   async function handleLogin(){
     const response = await api.login(userLogin.email,userLogin.password)
     const result = await response.json()
-    console.log(result);
     if(!result.value){
       return alert(result)
     }
-
-    setUser({name:result.value.nameUser,email:result.value.emailUser,idUser:result.value.idUser})
-    console.log(user);
     localStorage.setItem("token",result.token)
+    setUser({name:result.value.nameUser,email:result.value.emailUser,idUser:result.value.idUser})
+
     navigate('/')
-    console.log(user);
 
  
-  } 
+  }
 
 
   function handleSubmit(event) {

@@ -37,18 +37,11 @@ export default function Login() {
   function handleInfoChanges(event) {
     setUserLogin({ ...userLogin, [event.target.name]: event.target.value });
   }
-  // function handleButton() {
 
-  //   if (userLogin.email===user.email && userLogin.password===user.password){
-  //       console.log("passou")
-  //   }else{
-  //       console.log("nao passou");
-  //   }
-  // }
   return (
     <main className="flex flex-col md:flex-row relative items-center   font-Inter text-base ">
       <section className="h-3/4 md:h-screen md:w-1/2  md:bg-slate-100 absolute md:relative mt-20 md:mt-0   flex items-center justify-center">
-        <div className="flex flex-col items-center bg-white gap-4 p-3 md:w-3/5">
+        <div className="flex flex-col items-center bg-white gap-4 p-3 md:w-[31vw]">
           <form
             action=""
             onSubmit={handleSubmit}
@@ -64,7 +57,7 @@ export default function Login() {
                 onChange={handleInfoChanges}
                 value={userLogin.email}
                 name="email"
-                className="bg-slate-100 h-10 rounded-lg w-64 font-medium placeholder-stone-500"
+                className="bg-slate-100 h-10 rounded-lg md:w-[23vw] font-medium placeholder-stone-500"
               />
             </label>
             <label className="flex flex-col font-semibold ">
@@ -75,18 +68,18 @@ export default function Login() {
                 onChange={handleInfoChanges}
                 value={userLogin.password}
                 name="password"
-                className="bg-slate-100 h-10 rounded-lg w-64 font-medium placeholder-stone-500"
+                className="bg-slate-100 h-10 rounded-lg  md:w-[23vw] font-medium placeholder-stone-500"
               />
             </label>
             <button
               type="submit"
-              className="bg-laranja text-white rounded-lg h-14 w-64 px-5  "
+              className="bg-laranja text-white rounded-lg h-14  md:w-[23vw] px-5  "
               onClick={handleLogin}
             >
               Fazer Login
             </button>
           </form>
-          <span className="flex gap-2">
+          <span className="flex gap-2  md:w-[23vw]">
             <p>Não possui Cadastro? </p>
             <Link to="/cadastro" className="text-laranja">
               Clique aqui

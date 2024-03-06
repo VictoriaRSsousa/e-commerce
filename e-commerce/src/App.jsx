@@ -27,7 +27,7 @@ function App() {
         
         <Route path="/produtos/" element={<Produtos/>}/>
         <Route path="/categorias/" element={<Categorias/>}/>
-        <Route path="/produto/:id" element={<Produto/>}/>
+        <Route path="/produto/:id/" element={<Produto/>}/>
 
         {/* <Route path="*" element={<div>Pagina nao encontrada</div>}/> */}
  

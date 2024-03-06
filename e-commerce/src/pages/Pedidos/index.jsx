@@ -12,17 +12,13 @@ import { ProdutosContext } from "../../contexts/ProdutosContext";
 
 export default function Pedidos(){
     const [opcaoSelecionada, setOpcaoSelecionada] = useState("");
-    const [datasVendas, setDataVendas] = useState()
+
 
     const [showCompra, setShowCompra] = useState([])
     const {produtos,setProdutos} = useContext(ProdutosContext)
 
-    
-    
-    const { compras, setCompras } = useContext(ComprasContext);
     const navigate = useNavigate()
     const {user} = useContext(UsersContext)
-    console.log(compras);
     
     function handleOpcao(event){
         setOpcaoSelecionada(event.target.value)
@@ -33,11 +29,7 @@ export default function Pedidos(){
     async function handleCompras(){
         const response = await api.listarCompra()
         const result = await response.json()
-        const datas = result.map((datas)=> datas.data_da_venda)
- //       const venda = result.map((venda)=>venda.sales)
-        setDataVendas(datas)
         setShowCompra(result)
-        console.log(showCompra,"state")   
             
         }
         useEffect(()=>{
@@ -51,26 +43,14 @@ export default function Pedidos(){
         useEffect(()=>{
             
         },[opcaoSelecionada])
-        
-        
-        //tela de logar
+
         
         useEffect(()=>{
             if(!user){
-                console.log("nao tem");
                 navigate('/login')
             }
-            
-            
         },[])
-    
 
-//     <details>
-//   <summary>Details</summary>
-//   Something small enough to escape casual notice.
-// </details>
-
-console.log(showCompra,"log");
 
     return(
         <>
@@ -129,9 +109,9 @@ console.log(showCompra,"log");
     //   <CartCard key={pedidos.id} p={p} />
     // ))} */}
                                 <div className=" my-5 flex flex-col gap-5">   
-                                    {compras.map((compra)=>(
+                                    {/* {compras.map((compra)=>(
                                         <CardPedido compra ={compra} key={compras.id}/>
-                                    ))}   
+                                    ))}    */}
                                 </div>              
                                                 
                             </section>    

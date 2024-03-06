@@ -30,30 +30,22 @@ export default function Header() {
       .map((sapato) => sapato.qtd)
       .reduce((acc, atual) => acc + atual, 0) 
 
-  const [cartTotal, setCartTotal] = useState( parseInt(localStorage.getItem("cartTotal")))
-  const [search,setSearch] = useState("")
-  const [showCart, setShowCart] = useState(false)
-  const [showMenu,setShowMenu] = useState(false)
+      const [search,setSearch] = useState("")
+      const [showCart, setShowCart] = useState(false)
+      const [showMenu,setShowMenu] = useState(false)
+      
+      const [cartTotal, setCartTotal] = useState( parseInt(localStorage.getItem("cartTotal")) || 0)
 
-  
   useEffect(() => {
-    setCartTotal(cartTotal)
+    setCartTotal(totalCart)
     localStorage.setItem("cartTotal", totalCart);
-  }, [cartTotal]);
+  }, [totalCart]);
 
   function handleCart() {    
     setPedidos([]);
     setCartTotal(0);
   }
   
-  // function handleCompra() {
-  //   setCompras((preview)=>{
-  //     //const differentItems =  preview.filter((item)=>item.id!==pedidos.id)
-  //     return [{pedido:pedidos,total:somar}]
-  //              });
-  //   setPedidos([])
-
-  // }
 
   function handleSearch(event){
     setSearch(event.target.value)
@@ -76,23 +68,24 @@ export default function Header() {
   }
 
   function handleSair(){
-
-    localStorage.removeItem("token")
-    localStorage.removeItem("user")
+    setUser([])
+    localStorage.removeItem(null)
+    localStorage.removeItem(null)
     //setUser({})
   }
 
-  const {product_id, price, qtd} = pedidos
-  console.log(pedidos,"pedidos header");
-  
   const pedidosCompra = pedidos.map((pedido)=>{
     return {sale_product_id:pedido.product_id,price:pedido.price,qtd_sale:pedido.qtd}
   })
-  console.log(pedidosCompra);
+
   async function handleCompra(){
+    //user id do token
     const response = await api.compra(user.idUser,pedidosCompra)
     const result = await response.json()
-    console.log(result);
+    alert(result.message)
+
+
+    setPedidos([])
 
  
   }
@@ -114,7 +107,7 @@ export default function Header() {
               <input
                 type="search "
                 placeholder="         Buscar"
-                className="flex h-10 text-Inter font-normal text-stone-500 w-[520px]"
+                className="flex h-10 text-Inter font-normal text-stone-500 w-[36vw] rounded"
               />
             </label>
             <article className="flex text-[white] fonr-semibold gap-5 items-center">
@@ -151,7 +144,7 @@ export default function Header() {
               </button>
               {/* <Cart/> */}{
                 showCart?
-                <div className="flex-col justify-between h-96 w-64 p-8 bg-zinc-50 fixed right-0 flex top-0 	 font-semibold rounded-l-lg  duration-1000 out-in-ease  overflow-auto ">
+                <div className="flex-col justify-between h-96 w-64 p-8 bg-zinc-50 fixed right-5 flex top-5 z-10	 font-semibold rounded-l-lg  duration-1000 out-in-ease  overflow-auto ">
                 <header>
                   <div className="flex justify-between items-center"> 
                     <h2 className="text-black">Meu Carrinho</h2>
@@ -386,7 +379,7 @@ export default function Header() {
               placeholder="       Buscar"
               onChange={handleSearch}
               value={search}
-              className="w-64 rounded h-8"
+              className="w-[80vw] rounded h-8"
             />
           </label>
         </main>

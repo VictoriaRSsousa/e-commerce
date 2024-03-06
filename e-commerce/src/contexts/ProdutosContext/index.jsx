@@ -10,7 +10,6 @@ export default function ProdutosProvider({children}){
         const response = await api.getProducts()
         const result = await response.json()
         setProdutos(result)
-        console.log(produtos,"contexto");
  
     }
 

@@ -41,9 +41,9 @@ export default function Cadastro() {
   return (
     <main className="flex flex-col md:flex-row relative items-center   font-Inter text-base ">
       <section className="h-3/4 md:h-screen md:w-1/2  md:bg-slate-100 absolute md:relative mt-20 md:mt-0   flex items-center justify-center">
-        <div className="flex flex-col bg-white items-center gap-4 p-3 md:w-3/5">
+        <div className="flex flex-col bg-white items-center gap-5 p-3 md:w-[31vw]">
           <h2 className="font-semibold text-2xl">Cadastre-se</h2>
-          <form action="" onSubmit={handleSubmit}>
+          <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4">
             <label htmlFor="" className="flex flex-col font-semibold  ">
               Nome:*
               <input
@@ -51,7 +51,7 @@ export default function Cadastro() {
                 onChange={handleform}
                 placeholder="   Digite seu nome"
                 name="name"
-                className="bg-slate-100 h-10 rounded-lg w-64 font-medium placeholder-stone-500"
+                className="bg-slate-100 h-10 rounded-lg md:w-[23vw] font-medium placeholder-stone-500"
                 value={user.name}
               />
             </label>
@@ -62,7 +62,7 @@ export default function Cadastro() {
                 onChange={handleform}
                 placeholder="   Digite seu e-mail"
                 name="email"
-                className="bg-slate-100 h-10 rounded-lg w-64 font-medium placeholder-stone-500"
+                className="bg-slate-100 h-10 rounded-lg md:w-[23vw] font-medium placeholder-stone-500"
                 value={user.email}
               />
             </label>
@@ -73,13 +73,13 @@ export default function Cadastro() {
                 onChange={handleform}
                 placeholder="   Digite sua senha"
                 name="password"
-                className="bg-slate-100 h-10 rounded-lg w-64 font-medium placeholder-stone-500"
+                className="bg-slate-100 h-10 rounded-lg md:w-[23vw] font-medium placeholder-stone-500"
                 value={user.password}
               />
             </label>
             <button
               type="submit"
-              className="bg-laranja text-white rounded-lg h-14 w-64 px-5 "
+              className="bg-laranja text-white rounded-lg h-14 md:w-[23vw] px-5"
               onClick={handleCadastro}
             >
               Cadastrar

@@ -16,7 +16,6 @@ export default function Produto() {
   const { id } = useParams();
   const {produtos} = useContext(ProdutosContext)
   const produto = produtos.filter((produto)=>produto.product_id ==parseInt(id))
-  console.log(produto[0]);
   const {pedidos,setPedidos} = useContext(PedidosContext)
   const [qtdItens, setqtdItens] = useState(0)
 
@@ -38,7 +37,6 @@ export default function Produto() {
         const differentItems =  preview.filter((item)=>{
           return item.product_id!== produto[0].product_id})
           console.log(produto[0]);
-        const {product_id, qtd,price, image} = produto[0]
         return [...differentItems , {...produto[0], qtd: qtdItens}]
         
         })

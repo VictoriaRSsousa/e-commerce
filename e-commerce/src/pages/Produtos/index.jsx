@@ -5,12 +5,17 @@ import Destaque from "../../components/Destaque";
 import { useState,useEffect,useContext } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { ProdutosContext } from "../../contexts/ProdutosContext";
+import { useSearchParams } from "react-router-dom";
 
 export default function Produtos() {
 
   const {produtos , setProdutos} = useContext(ProdutosContext)
   
   const search = useLocation().search.slice(11)
+  let [searchParams, setSearchParams] = useSearchParams()
+  // console.log(searchParams.get("search"));
+
+ // const produtosPesquisados = produtos.filter((produto)=>produto)
   
 
   const [opcaoSelecionada, setOpcaoSelecionada] = useState(search);

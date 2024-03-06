@@ -9,15 +9,24 @@ import { ComprasContext } from "../../contexts/ComprasContext";
 import { UsersContext } from "../../contexts/UserContext";
 import CartCard from "../CartCard";
 import api from "../../api";
+import { useSearchParams } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
+
 
 export default function Header() {
   const loc = useLocation()
+
+  const navigate = useNavigate()
 
   const { compras, setCompras } = useContext(ComprasContext);
   const { pedidos, setPedidos } = useContext(PedidosContext);
   const {user,setUser} = useContext(UsersContext)
   const {setToken} = useContext(UsersContext)
   const name = user?.name 
+
+  let [searchParams, setSearchParams] = useSearchParams()
+
 
   const somar = pedidos
     .filter((sapato) => sapato.qtd > 0)
@@ -93,8 +102,20 @@ export default function Header() {
  
   }
 
+  function handleSubmit(e){
+    // The serialize function here would be responsible for
+    // creating an object of { key: value } pairs from the
+    // fields in the form that make up the query.
+    
+    //e.preventDefault()
+    //  let params = serializeFormQuery(e.target)
+    //  console.log(params);
+    navigate(`/produtos?search=${search}`)
+      // setSearchParams(params);
+  }
+
   useEffect(()=>{
-    console.log(search);
+    
   },[search])
   
 
@@ -110,16 +131,19 @@ export default function Header() {
               alt="logo e-rede"
               className="h-8 w-20"
             />
-            <label htmlFor="" className="flex items-center  ">
-                {/* <IoMdSearch className=" h-6 w-6 m-2 absolute text-cinza-medio" /> */}
-              <input
-                type="text"
-                placeholder= "  Buscar"
-                onChange={handleSearch}
-                value={search}
-                className="flex h-10 text-Inter font-normal text-stone-500 w-[36vw] rounded"
-              />
-            </label>
+            
+              <form   onSubmit={handleSubmit} className="flex items-center  ">
+                  {/* <IoMdSearch className=" h-6 w-6 m-2 absolute text-cinza-medio" /> */}
+                <input
+                  type="text"
+                  name="search"
+                  placeholder= "  Buscar"
+                  onChange={handleSearch}
+                  value={search}
+                  className="flex h-10 text-Inter font-normal text-stone-500 w-[36vw] rounded"
+                />
+              </form>
+          
             <article className="flex text-[white] fonr-semibold gap-5 items-center">
               {
                 name?

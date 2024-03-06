@@ -11,7 +11,7 @@ import { ProdutosContext } from "../../contexts/ProdutosContext";
 
 
 export default function Pedidos(){
-    const [opcaoSelecionada, setOpcaoSelecionada] = useState("");
+    const [opcaoSelecionada, setOpcaoSelecionada] = useState("pedido");
 
 
     const [showCompra, setShowCompra] = useState([])
@@ -65,8 +65,8 @@ export default function Pedidos(){
                     </section>
                     <section className="md:hidden  mt-8">
                         <form action="">
-                        <select name="" id="" className="bg-laranja text-white h-12 w-60 font-Inter font-semibold text-base rounded-lg" value={opcaoSelecionada} onChange={handleOpcao}>
-                            <option  value="pedido"  selected className="h-10 w-64">Meus Pedidos</option>
+                        <select className="bg-laranja text-white h-12 w-60 font-Inter font-semibold text-base rounded-lg" value={opcaoSelecionada} onChange={handleOpcao} >
+                            <option  value="pedido"  className="h-10 w-64">Meus Pedidos</option>
                             <option   value="informacao"  className="h-12 w-64">Minhas Informações</option>
                         </select>
                         </form>
@@ -78,8 +78,8 @@ export default function Pedidos(){
                                 <div className="flex justify-between">
                                     <h2 className="text-black md:text-stone-500 text-base font-semibold ">Meus Pedidos</h2>
                                     <span className="flex">
-                                        <p className="hidden md:flex">Status</p>
-                                        <p className="hidden md:flex">Meus Pedidos</p>
+                                        <p className="hidden md:flex">Status Meus Pedidos</p>
+                                        {/* <p className="hidden md:flex">Meus Pedidos</p> */}
                                     </span>
                                 </div>
                                 {
@@ -89,29 +89,18 @@ export default function Pedidos(){
                                     //faço um outro map para percorrer as vendas
                                     showCompra?
                                     showCompra.map((data,index)=>{
-                                        console.log(data);
                                         return (
                                         <details key={index}>
-                                            <summary>{data.data_da_venda}</summary>
+                                            <summary key={index}>{data.data_da_venda}</summary>
                                             {data.sales.map((sale)=> (
-                                                <div key={sale.sale_id}>
+                                                <div key={sale.id_sale}>
                                                     <CardPedido  p={sale}/>
                                                 </div>
-                                            )
-                                            )}
-                                            
+                                            ))}    
                                         </details>)}):null
-
                                 }
-    {/* {pedidos
-    // .filter((sapato) => sapato.qtd > 0)
-    // .map((p) => (
-    //   <CartCard key={pedidos.id} p={p} />
-    // ))} */}
                                 <div className=" my-5 flex flex-col gap-5">   
-                                    {/* {compras.map((compra)=>(
-                                        <CardPedido compra ={compra} key={compras.id}/>
-                                    ))}    */}
+   
                                 </div>              
                                                 
                             </section>    

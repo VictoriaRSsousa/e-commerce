@@ -8,11 +8,9 @@ export default function PedidosProvider({children}){
 
     useEffect(()=>{
         if(pedidos){
-            console.log("tem pedido");
             localStorage.setItem("pedidos",JSON.stringify(pedidos))
         }else{
             localStorage.removeItem("pedidos")
-            console.log("nao tem pedido");
         }
     },[pedidos])
 

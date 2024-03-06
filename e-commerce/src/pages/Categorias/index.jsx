@@ -10,19 +10,12 @@ export default function Categorias(){
     async function handleApi(){
         const response = await api.getCategories()
         const result = await response.json()
-        setCategories(result)
-        console.log(result);
-        console.log(categories);
-        
+        setCategories(result)      
     }
 
     useEffect(()=>{
         handleApi()
     },[])
-
-    // const allCategorias = arrayDeSapatos.map((sapato) => sapato.tipo);
-    // const categorias = [...new Set(allCategorias)];
-    
 
     //RESPONSIVO
     return(
@@ -31,7 +24,7 @@ export default function Categorias(){
         <Header/>
         <main  className=" flex justify-center my-14 md:my-20  " >
             <div className="grid md:grid-cols-4 gap-10">
-                 { categories.map((categoria)=>(<CardCategoria categoria={categoria} key={categories.categorie_id} />))} 
+                 { categories.map((categoria)=>(<CardCategoria categoria={categoria} key={categoria.categorie_id} />))} 
             </div>
         </main>
         <Footer />

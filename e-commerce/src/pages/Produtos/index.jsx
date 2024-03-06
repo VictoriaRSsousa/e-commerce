@@ -9,22 +9,18 @@ import { ProdutosContext } from "../../contexts/ProdutosContext";
 export default function Produtos() {
 
   const {produtos , setProdutos} = useContext(ProdutosContext)
-  console.log(produtos);
   
   const search = useLocation().search.slice(11)
   
 
   const [opcaoSelecionada, setOpcaoSelecionada] = useState(search);
   const [categories,setCategories] = useState([])
-  console.log(opcaoSelecionada);
 
   async function handleApi(){
       const response = await api.getCategories()
       const result = await response.json()
       setCategories(result)
-      console.log(result);
-      console.log(categories);
-      
+ 
   }
 
   useEffect(()=>{
@@ -35,11 +31,6 @@ export default function Produtos() {
   function handleOpcaoChange(event) {
     setOpcaoSelecionada(event.target.value);
   }
-//   console.log(opcaoSelecionada);
-
-  // const allCategorias = arrayDeSapatos.map((sapato) => sapato.tipo);
-  // const categorias = [...new Set(allCategorias)];
-  // console.log(categorias);
    const categoriasSelecionada = produtos.filter((product)=> product.categorie===opcaoSelecionada)
 
   return (
@@ -69,22 +60,25 @@ export default function Produtos() {
 
         <section className="md:hidden">
         <form action="" className="h-10 flex gap-4 items-center px-2 mx-2" >
-          <select name="" id=""className="bg-laranja text-white h-12 w-60 font-Inter font-semibold text-base rounded-lg" value={opcaoSelecionada} onChange={handleOpcaoChange}>
+          {/* <select name=""  id=""className="bg-laranja text-white h-12 w-60 font-Inter font-semibold text-base rounded-lg" value={opcaoSelecionada} onChange={handleOpcaoChange} > */}
             {categories.map((categoria) => (
-              <option           
-                type="radio"
-                value={categoria.categorie}
-                onChange={handleOpcaoChange}>{categoria.categorie}
+               <select name="" key={categoria.categorie_id} id=""className="bg-laranja text-white h-12 w-60 font-Inter font-semibold text-base rounded-lg" value={opcaoSelecionada} onChange={handleOpcaoChange} >
+                <option           
+                  type="radio"
+                  value={categoria.categorie}
+                  onChange={handleOpcaoChange}>{categoria.categorie}
+                </option>
+                </select>
+                )) 
+                }
 
-              </option>)) }
-
-          </select>
+          
         </form>
         </section>
         <section className=" grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-10 p-5 md:p-2">
           {opcaoSelecionada?
             categoriasSelecionada.map((sapato) => (
-            <Destaque sapato={sapato} key={sapato.id} />)):produtos.map((product) => (
+            <Destaque sapato={sapato} key={sapato.product_id} />)):produtos.map((product) => (
                 <Destaque sapato={product} key={product.product_id} />))
           }
        

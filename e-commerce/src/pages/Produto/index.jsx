@@ -2,7 +2,7 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { BiSolidUpArrow,BiSolidDownArrow  } from "react-icons/bi";
 import { arrayDeSapatos } from "../../api/index";
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useContext, useState, useEffect} from "react"
 import { PedidosContext } from "../../contexts/PedidosContext";
 import { ProdutosContext } from "../../contexts/ProdutosContext";
@@ -13,11 +13,17 @@ import { ProdutosContext } from "../../contexts/ProdutosContext";
 
 export default function Produto() {
   
+  const navigate = useNavigate()
   const { id } = useParams();
   const {produtos} = useContext(ProdutosContext)
   const produto = produtos.filter((produto)=>produto.product_id ==parseInt(id))
-  const {pedidos,setPedidos} = useContext(PedidosContext)
+  const {setPedidos} = useContext(PedidosContext)
   const [qtdItens, setqtdItens] = useState(0)
+
+
+  useEffect(() => {
+
+  }, [id]);
 
 
   function handleQtdItens(action){
@@ -36,7 +42,6 @@ export default function Produto() {
       setPedidos((preview)=>{
         const differentItems =  preview.filter((item)=>{
           return item.product_id!== produto[0].product_id})
-          console.log(produto[0]);
         return [...differentItems , {...produto[0], qtd: qtdItens}]
         
         })
@@ -86,9 +91,7 @@ export default function Produto() {
             </article>
           </section>
         </div>
-      </main>:
-        <Navigate to="*"/>
-      }
+      </main>: <h1 className="m-48 flex justify-center items-center font-bold font-Inter text-4xl">PRODUTO NÃO ENCONTRADO</h1>}
 
       <Footer />
     </>

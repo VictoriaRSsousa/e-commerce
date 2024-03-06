@@ -36,7 +36,7 @@ export default function Header() {
       
       const [cartTotal, setCartTotal] = useState( parseInt(localStorage.getItem("cartTotal")) || 0)
 
-  useEffect(() => {
+  useEffect(() => {  
     setCartTotal(totalCart)
     localStorage.setItem("cartTotal", totalCart);
   }, [totalCart]);
@@ -49,6 +49,7 @@ export default function Header() {
 
   function handleSearch(event){
     setSearch(event.target.value)
+    
   }
 
   function handleShowCart(action){
@@ -89,6 +90,7 @@ export default function Header() {
 
  
   }
+  
 
   return (
     <>
@@ -375,9 +377,9 @@ export default function Header() {
           <label htmlFor="" className="flex relative items-center">
             <IoMdSearch className=" h-4 absolute m-2 text-[#666666DD]" />
             <input
-              type="text "
-              placeholder="       Buscar"
-              onChange={handleSearch}
+              type="text"
+              placeholder="Buscar"
+              onChange={(event)=>handleSearch(event)}
               value={search}
               className="w-[80vw] rounded h-8"
             />

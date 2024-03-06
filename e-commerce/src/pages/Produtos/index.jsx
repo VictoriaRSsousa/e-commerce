@@ -38,39 +38,45 @@ export default function Produtos() {
       <Header />
       <main className="flex flex-col md:flex-row mt-5 md:m-20 gap-10   md:gap-20  justify-nromal md:justify-center items-center md:items-stretch	">
         <section className=" hidden md:flex flex-col bg-zinc-50 rounded-lg shadow-lg h-fit w-[251px] text-base	text-stone-500 font-semibold">
-            <form action="" className="">
+
+
+
+        <form action="" >
+
                 {categories.map((categoria) => (
                     <div className={`${opcaoSelecionada === categoria.categorie?"bg-slate-100 text-laranja" : ""} h-10 flex gap-4 items-center px-2 mx-2`} key={categoria.categorie_id}>
                     <input
-                        type="radio"
-                        value={categoria.categorie}
-                        id={`categoria${categoria.categorie_id}`}
-                        checked={opcaoSelecionada === categoria.categorie}
-                        onChange={handleOpcaoChange}
-                    />
-                    <label htmlFor="">{categoria.categorie}</label>
-                    </div>
-
-                )
-                ) }
-            </form>
-
+                    type="radio"
+                    value={categoria.categorie}
+                    id={`categoria${categoria.categorie_id}`}
+                    checked={opcaoSelecionada === categoria.categorie}
+                    onChange={handleOpcaoChange}/>
+                <label htmlFor="">{categoria.categorie}</label>
+                </div>
+                  )
+                  )
+                   }
+           
+           </form>
 
         </section>
+
 
         <section className="md:hidden">
         <form action="" className="h-10 flex gap-4 items-center px-2 mx-2" >
           {/* <select name=""  id=""className="bg-laranja text-white h-12 w-60 font-Inter font-semibold text-base rounded-lg" value={opcaoSelecionada} onChange={handleOpcaoChange} > */}
-            {categories.map((categoria) => (
-               <select name="" key={categoria.categorie_id} id=""className="bg-laranja text-white h-12 w-60 font-Inter font-semibold text-base rounded-lg" value={opcaoSelecionada} onChange={handleOpcaoChange} >
-                <option           
+            
+               <select name=""  id=""className="bg-laranja text-white h-12 w-60 font-Inter font-semibold text-base rounded-lg" value={opcaoSelecionada} onChange={handleOpcaoChange} >
+               {categories.map((categoria) => (
+                <option        
+                key={categoria.categorie_id}   
                   type="radio"
                   value={categoria.categorie}
                   onChange={handleOpcaoChange}>{categoria.categorie}
                 </option>
+                )) }
                 </select>
-                )) 
-                }
+                
 
           
         </form>

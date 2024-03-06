@@ -4,11 +4,10 @@ import { PedidosContext } from "../../contexts/PedidosContext";
 
 
 export default function CardPedido(props){
-    const {pedidos} = useContext(PedidosContext)
-    console.log((pedidos[0]));
+   // const {pedidos} = useContext(PedidosContext)
 
     return(
-        <main className="md:flex justify-between font-Inter">
+        <main className="md:flex justify-between font-Inter" key={props.p.product_id}>
             
             <div className=" flex  gap-4">        
                 <img src={props.p.image} alt="" className="w-20 h-[70px] object-cover	" />

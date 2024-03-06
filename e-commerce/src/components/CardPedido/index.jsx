@@ -10,12 +10,12 @@ export default function CardPedido(props) {
     <main className=" font-Inter font-semibold  md:flex-col " key={props.p.id_sale}>
       <div className="border-t border-stone-500   "></div>
       <div className="flex flex-col md:flex-row justify-between items-around">
-        <section className="flex flex-col gap-4">
-          <div className="flex">
+        <section className="flex flex-col gap-10">
+          <div className="flex gap-4">
             <img
               src={produto[0].image}
               alt=""
-              className="w-20 h-[70px] object-cover rounded-lg	"
+              className="w-20 h-16 object-cover rounded-lg border border-cinza-escuro	"
             />
             <div>
               <p className="text-sm">{produto[0].model}</p>

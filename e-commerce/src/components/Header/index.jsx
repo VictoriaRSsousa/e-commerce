@@ -16,6 +16,7 @@ export default function Header() {
   const { compras, setCompras } = useContext(ComprasContext);
   const { pedidos, setPedidos } = useContext(PedidosContext);
   const {user,setUser} = useContext(UsersContext)
+  const {setToken} = useContext(UsersContext)
   const name = user?.name 
 
   const somar = pedidos
@@ -70,8 +71,9 @@ export default function Header() {
 
   function handleSair(){
     setUser([])
-    localStorage.removeItem(null)
-    localStorage.removeItem(null)
+    setToken([])
+    localStorage.removeItem("user")
+    localStorage.removeItem("token")
     //setUser({})
   }
 
@@ -90,6 +92,10 @@ export default function Header() {
 
  
   }
+
+  useEffect(()=>{
+    console.log(search);
+  },[search])
   
 
   return (
@@ -105,16 +111,18 @@ export default function Header() {
               className="h-8 w-20"
             />
             <label htmlFor="" className="flex items-center  ">
-              <IoMdSearch className=" h-6 w-6 m-2 absolute text-cinza-medio" />
+                {/* <IoMdSearch className=" h-6 w-6 m-2 absolute text-cinza-medio" /> */}
               <input
-                type="search "
-                placeholder="         Buscar"
+                type="text"
+                placeholder= "  Buscar"
+                onChange={handleSearch}
+                value={search}
                 className="flex h-10 text-Inter font-normal text-stone-500 w-[36vw] rounded"
               />
             </label>
             <article className="flex text-[white] fonr-semibold gap-5 items-center">
               {
-                user?
+                name?
                 <div className="flex ml-4 gap-5 items-center">
                   <p>Olá, {name}</p>
                   <button onClick={handleSair} className="text-white bg-laranja w-20 h-10 rounded-lg "> Sair </button>
@@ -160,7 +168,7 @@ export default function Header() {
                     .filter((sapato) => sapato.qtd > 0)
                     .map((pedido) =>
                     
-                    {console.log(pedido)
+                    {
                       return(
                       <div key={pedido.product_id}>
                         <CartCard  p={pedido} />
@@ -339,11 +347,16 @@ export default function Header() {
                   <div className="border border-black"></div>
                 </header>
                 <div className="text-black flex flex-col gap-6	justify-around ">
-                  {pedidos
+                {pedidos
                     .filter((sapato) => sapato.qtd > 0)
-                    .map((p) => (
-                      <CartCard key={pedidos.id} p={p} />
-                    ))}
+                    .map((pedido) =>
+                    
+                    {
+                      return(
+                      <div key={pedido.product_id}>
+                        <CartCard  p={pedido} />
+                      </div>
+                    )})}
                 </div>
                 <footer className="flex flex-col gap-3">
                   <div className="border border-black "></div>
@@ -375,11 +388,11 @@ export default function Header() {
         </header>
         <main className="flex justify-center  gap-2">
           <label htmlFor="" className="flex relative items-center">
-            <IoMdSearch className=" h-4 absolute m-2 text-[#666666DD]" />
+           
             <input
               type="text"
-              placeholder="Buscar"
-              onChange={(event)=>handleSearch(event)}
+              placeholder= "  Buscar"
+              onChange={handleSearch}
               value={search}
               className="w-[80vw] rounded h-8"
             />

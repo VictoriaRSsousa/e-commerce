@@ -55,7 +55,7 @@ export default function Produto() {
     <>
       <Header/>
       {produto.length>0?      <main className=" flex justify-center items-center  ">
-        <div className="	 flex flex-col md:flex-row  md:items-center mt-14 md:m-40 shadow-lg bg-slate-100 p-6 md:p-7 gap-2 md:gap-16 font-Inter">
+        <div className="	 flex flex-col md:flex-row items-center md:items-center mt-14 md:m-40 shadow-lg bg-slate-100 p-6 md:p-7 gap-2 md:gap-16 font-Inter">
           <section className="">
             <img
               src={produto[0].image}

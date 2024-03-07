@@ -5,12 +5,10 @@ import { MdClose } from "react-icons/md";
 import { Link, json, useLocation } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
 import { PedidosContext } from "../../contexts/PedidosContext";
-import { ComprasContext } from "../../contexts/ComprasContext";
 import { UsersContext } from "../../contexts/UserContext";
 import CartCard from "../CartCard";
 import api from "../../api";
 import { useSearchParams } from "react-router-dom";
-
 import { useNavigate } from "react-router-dom";
 
 

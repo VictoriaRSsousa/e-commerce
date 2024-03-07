@@ -10,14 +10,10 @@ export default function Cadastro() {
   async function handleCadastro(){
     const response = await api.cadastro(user.name,user.email,user.password)
     const result = await response.json()
-    console.log(result, "cadastro");
     alert(result.message)
     
  
   } 
-
-
-  console.log(user);
 
 
   function handleform(event) {

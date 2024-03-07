@@ -51,7 +51,6 @@ export default function Pedidos(){
             }
         },[])
 
-
     return(
         <>
             <Header/>
@@ -83,11 +82,12 @@ export default function Pedidos(){
                                     </span>
                                 </div>
                                 {
+                                    
                                     // produtos.map((sapato)=>(<Destaque key={sapato.product_id} sapato={sapato}/>))
                                     //map no resultado da requisição 
                                     // em cada map tenho data e venda
                                     //faço um outro map para percorrer as vendas
-                                    showCompra?
+                                    showCompra!=='Falha na autenticação'?
                                     showCompra.map((data,index)=>{
                                         return (
                                         <details key={index}>

@@ -16,14 +16,11 @@ export default function Header() {
   const loc = useLocation()
 
   const navigate = useNavigate()
-
-  const { compras, setCompras } = useContext(ComprasContext);
   const { pedidos, setPedidos } = useContext(PedidosContext);
   const {user,setUser} = useContext(UsersContext)
   const {setToken} = useContext(UsersContext)
   const name = user?.name 
 
-  let [searchParams, setSearchParams] = useSearchParams()
 
 
   const somar = pedidos
@@ -81,7 +78,6 @@ export default function Header() {
     setToken([])
     localStorage.removeItem("user")
     localStorage.removeItem("token")
-    //setUser({})
   }
 
   const pedidosCompra = pedidos.map((pedido)=>{
@@ -89,7 +85,6 @@ export default function Header() {
   })
 
   async function handleCompra(){
-    //user id do token
     const response = await api.compra(user.idUser,pedidosCompra)
     const result = await response.json()
     alert(result.message)
@@ -101,15 +96,7 @@ export default function Header() {
   }
 
   function handleSubmit(e){
-    // The serialize function here would be responsible for
-    // creating an object of { key: value } pairs from the
-    // fields in the form that make up the query.
-    
-    //e.preventDefault()
-    //  let params = serializeFormQuery(e.target)
-    //  console.log(params);
     navigate(`/produtos?search=${search}`)
-      // setSearchParams(params);
   }
 
   useEffect(()=>{

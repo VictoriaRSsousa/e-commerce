@@ -5,12 +5,13 @@ export default function CardPedido(props) {
   const {produtos} = useContext(ProdutosContext)
   const produto = produtos.filter((prod)=>prod.product_id === props.p.sale_product_id) 
 
+  
 
   return (
     <main className=" font-Inter font-semibold  md:flex-col " key={props.p.id_sale}>
-      <div className="border-t border-stone-500   "></div>
-      <div className="flex flex-col md:flex-row justify-between items-around">
-        <section className="flex flex-col gap-10">
+      <div className="border-t border-stone-500 pb-2   "></div>
+      <div className="flex flex-col  md:flex-row pb-2 justify-between items-around">
+        <section className="flex flex-col gap-10 ">
           <div className="flex gap-4">
             <img
               src={produto[0].image}

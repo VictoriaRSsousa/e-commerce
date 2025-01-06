@@ -23,7 +23,7 @@ export default function Home(){
             </div>
             <section className="p-3 md:p-24 ">
                 <h2 className="text-azul-escuro mb-5 md:mb-6  ml-3 md:ml-5 text-Inter font-semibold text-xl">Destaques</h2>
-                <div className="grid grid-cols-2 md:grid-cols-6 gap-2 md:gap-10">
+                <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-2 md:gap-10">
                     
                 {destaque.map((sapato)=>(<Destaque key={sapato.product_id} sapato={sapato}/>))}
                 </div>

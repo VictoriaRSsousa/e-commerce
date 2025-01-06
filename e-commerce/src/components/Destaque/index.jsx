@@ -1,19 +1,18 @@
 
 import { Link } from "react-router-dom";
-import Produto from "../../pages/Produto";
 
 
 export default function Destaque(props){
 
     return(
         <>
-        <div key={props.sapato.product_id} className="shadow-md rounded w-[45vw] md:w-[12vw]">
+        <div key={props.sapato.product_id} className="shadow-md min-w-[150px] rounded w-[45vw] md:w-[12vw]">
 
         <section>
-            <img src={props.sapato.image} alt="" className="w-full h-32" />
+            <img src={props.sapato.image} alt="" className="w-full h-32 object-cover" />
         </section>
         <section className="p-2 h-44 w-auto flex flex-col justify-between text-wrap " >
-            <div>
+            <div className="h-[72px">
                 <p className="text-[#1E3A8A] text-Inter font-bold text-wrap 	">{props.sapato.model}</p>
                 <p className="text-[#DDDDDD] font-medium	w-fit ">{props.sapato.categorie}</p>
                 <p className="text-[#EA580C] font-semibold">{props.sapato.price}</p>     

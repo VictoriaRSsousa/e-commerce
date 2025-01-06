@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContext, useEffect ,useState} from "react";
-import { UsersContext } from "../../contexts/UserContext";
 import api from "../../api";
 export default function Cadastro() {
-  // const {user, setUser} = useContext(UsersContext);
 
   const [user,setUser] = useState({name:"",email:"", password:""})
 
@@ -21,13 +19,10 @@ export default function Cadastro() {
       ...preview,
       [event.target.name]: event.target.value,
     }));
-    // console.log(user);
   }
   function handleSubmit(event) {
-    //para n ter o comportamento padrao do formulario e recarregar a pagina
     event.preventDefault();
      setUser({name: "", email: "",password:""});
-    // console.log(user.name)
   }
 
   useEffect(()=>{

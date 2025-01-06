@@ -1,10 +1,6 @@
-import { useContext } from "react";
-import { RiDeleteBin5Line } from "react-icons/ri";
-import { PedidosContext } from "../../contexts/PedidosContext";
 
 
 export default function CardPedido(props){
-   // const {pedidos} = useContext(PedidosContext)
 
     return(
         <main className="md:flex justify-between font-Inter" key={props.p.product_id}>

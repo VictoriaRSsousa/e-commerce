@@ -12,12 +12,6 @@ export default function Produtos() {
   const {produtos , setProdutos} = useContext(ProdutosContext)
   
   const search = useLocation().search.slice(11)
-  let [searchParams, setSearchParams] = useSearchParams()
-  // console.log(searchParams.get("search"));
-
- // const produtosPesquisados = produtos.filter((produto)=>produto)
-  
-
   const [opcaoSelecionada, setOpcaoSelecionada] = useState(search);
   const [categories,setCategories] = useState([])
 
@@ -69,7 +63,6 @@ export default function Produtos() {
 
         <section className="md:hidden">
         <form action="" className="h-10 flex gap-4 items-center px-2 mx-2" >
-          {/* <select name=""  id=""className="bg-laranja text-white h-12 w-60 font-Inter font-semibold text-base rounded-lg" value={opcaoSelecionada} onChange={handleOpcaoChange} > */}
             
                <select name=""  id=""className="bg-laranja text-white h-12 w-60 font-Inter font-semibold text-base rounded-lg" value={opcaoSelecionada} onChange={handleOpcaoChange} >
                {categories.map((categoria) => (
@@ -86,7 +79,7 @@ export default function Produtos() {
           
         </form>
         </section>
-        <section className=" grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-10 p-5 md:p-2">
+        <section className=" grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-10 p-5 md:p-2">
           {opcaoSelecionada?
             categoriasSelecionada.map((sapato) => (
             <Destaque sapato={sapato} key={sapato.product_id} />)):produtos.map((product) => (

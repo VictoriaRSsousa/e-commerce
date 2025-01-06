@@ -3,7 +3,7 @@ import CardPedido from "../../components/CardPedido";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { useEffect, useState,useContext } from "react"; 
-import { ComprasContext } from "../../contexts/ComprasContext";
+//import { ComprasContext } from "../../contexts/ComprasContext";
 import { UsersContext } from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
@@ -24,12 +24,27 @@ export default function Pedidos(){
         setOpcaoSelecionada(event.target.value)
     }
     
-    
+    function formateDate(dateString){
+        const date = new Date(dateString);
+  
+        const day = String(date.getDate()).padStart(2, '0'); // Adiciona zero à esquerda
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Mês começa de 0, por isso somamos 1
+        const year = date.getFullYear();
+        
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+        
+        return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+      
+    }
     
     async function handleCompras(){
         const response = await api.listarCompra()
         const result = await response.json()
         setShowCompra(result)
+
+        
             
         }
         useEffect(()=>{
@@ -57,7 +72,7 @@ export default function Pedidos(){
         
             <main className="">          
                 <div className=" flex flex-col md:flex-row  md:my-20 md:mx-20 items-center md:items-baseline   justify-center md:justify-normal ">          
-                    <section className="hidden  md:flex flex-col bg-slate-100 rounded-lg py-8 h-32 gap-3 w-64 p-8	">
+                    <section className="hidden  md:flex flex-col bg-slate-100 rounded-lg py-8  gap-3 w-64 p-8	">
                         <button href="" onClick={handleOpcao} value="pedido" className="focus:text-laranja"> Meus Pedidos</button>
                         <div className="border-t border-stone-500"></div>
                         <button href="" onClick={handleOpcao} value="informacao" className="focus:text-laranja ">Minhas Informações</button>
@@ -71,27 +86,21 @@ export default function Pedidos(){
                         </form>
                     </section>
                     
-                    <div className="flex flex-col  bg-slate-100 my-10  md:mx-10 py-8  w-4/5 p-4 md:p-10 rounded-lg   ">
+                    <div className="flex flex-col  bg-slate-100 my-10  md:mx-10 py-8 min-h-[140px]  w-4/5 p-4 md:p-10 rounded-lg   ">
                         {!opcaoSelecionada || opcaoSelecionada==="pedido"?
                             <section className=" ">
                                 <div className="flex justify-between">
                                     <h2 className="text-black md:text-stone-500 text-base font-semibold ">Meus Pedidos</h2>
                                     <span className="flex">
-                                        <p className="hidden md:flex">Status Meus Pedidos</p>
-                                        {/* <p className="hidden md:flex">Meus Pedidos</p> */}
+                                        <p className="hidden md:flex min-w-[155px]">Status Meus Pedidos</p>
                                     </span>
                                 </div>
                                 {
-                                    
-                                    // produtos.map((sapato)=>(<Destaque key={sapato.product_id} sapato={sapato}/>))
-                                    //map no resultado da requisição 
-                                    // em cada map tenho data e venda
-                                    //faço um outro map para percorrer as vendas
                                     showCompra!=='Falha na autenticação'?
                                     showCompra.map((data,index)=>{
                                         return (
                                         <details key={index}>
-                                            <summary key={index}>{data.data_da_venda}</summary>
+                                            <summary key={index}>{formateDate(data.data_da_venda)}</summary>
                                             {data.sales.map((sale)=> (
                                                 <div key={sale.id_sale}>
                                                     <CardPedido  p={sale}/>
@@ -99,7 +108,7 @@ export default function Pedidos(){
                                             ))}    
                                         </details>)}):null
                                 }
-                                <div className=" my-5 flex flex-col gap-5">   
+                                <div className=" flex flex-col gap-5">   
    
                                 </div>              
                                                 

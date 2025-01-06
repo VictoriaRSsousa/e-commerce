@@ -24,40 +24,8 @@ export  const arrayDeSapatos = [
     // Adicione mais objetos conforme necessário
   ];
 
-//   const baseURL = "http://localhost:3000"
-//   const api ={
-//     getProducts: async()=>{
-//         //const token = localStorage.getItem("token")
-//         return fetch(`${baseURL}/products`,
-//         {
-//            method:"GET",
-// //             headers:{
-// //                 "Authorization":`Bearer `
-// //             }
-//         })
-//     },
-//     postLogin: async(username, password)=>{
-//         console.log(username, password)
-//         return fetch(`${baseURL}/login`,{
-//             method:"POST",
-//             headers:{
-//                 "Content-Type":"application/json"
-//             },
-//             body:JSON.stringify({username:username, password:password})
-//         })
-//     }
-// }
 
-
-
-const baseUrl = "http://localhost:3000"
-// export const getProducts = async () =>{
-//     const response = await fetch(`${baseUrl}/products`);
-//     const products = await response.json();
-
-//     return products;
-//  }
-//const token = localStorage.getItem("token")
+const baseUrl = "http://localhost:5000"
 
  const api={
   getProducts: async () =>{
@@ -87,7 +55,6 @@ const baseUrl = "http://localhost:3000"
  },
  compra: async(sale_user_id,products) =>{
   const token = localStorage.getItem("token")
-  //console.log(...arguments);
   return fetch(`${baseUrl}/sales`,{
     
     method:"POST",
@@ -112,7 +79,5 @@ return fetch(`${baseUrl}/sales`,{
 }
  }
 
-
-// // 
  export default api
   

@@ -1,16 +1,14 @@
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoMdSearch } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { MdClose } from "react-icons/md";
 import { Link, json, useLocation } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
 import { PedidosContext } from "../../contexts/PedidosContext";
 import { UsersContext } from "../../contexts/UserContext";
-import CartCard from "../CartCard";
 import api from "../../api";
-import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import Cart from "../Cart";
+import MenuHamburguer from "../MenuHamburguer";
 
 export default function Header() {
   const loc = useLocation()
@@ -161,52 +159,9 @@ export default function Header() {
                   </p>
                 ) : null}
               </button>
-              {/* <Cart/> */}{
+              {
                 showCart?
-                <div className="flex-col justify-between h-96 w-64 p-8 bg-zinc-50 fixed right-5 flex top-5 z-10	 font-semibold rounded-l-lg  duration-1000 out-in-ease  overflow-auto ">
-                <header>
-                  <div className="flex justify-between items-center"> 
-                    <h2 className="text-black">Meu Carrinho</h2>
-                    <MdClose className="h-7 w-7 text-black cursor-pointer" onClick={()=>handleShowCart("close")}/>
-
-                  </div>
-                  <div className="border border-black"></div>
-                </header>
-                <div className="text-black flex flex-col gap-6	justify-around ">
-                  {pedidos
-                    .filter((sapato) => sapato.qtd > 0)
-                    .map((pedido) =>
-                    
-                    {
-                      return(
-                      <div key={pedido.product_id}>
-                        <CartCard  p={pedido} />
-                      </div>
-                    )})}
-                </div>
-                <footer className="flex flex-col">
-                  <div className="border border-black "></div>
-                  <article className="flex justify-between text-base	font-semibold	font-Inter">
-                    <h2 className="text-black">Valor Total:</h2>
-                    {<p className="text-azul-escuro">{somar.toFixed(2)}</p> ||
-                      0}
-                  </article>
-                  <div className=" flex font-Inter  justify-around items-center ">
-                    <button
-                      onClick={handleCart}
-                      className="cursor-pointer  text-stone-500  text-[10px]"
-                    >
-                      Esvaziar
-                    </button>
-                    <button
-                      onClick={handleCompra}
-                      className="bg-azul-escuro  text-white rounded-xl h-6 w-32 text-[10px] font-medium"
-                    >
-                      Finalizar Compra
-                    </button>
-                  </div>
-                </footer>
-              </div>:null
+               <Cart onClose={()=> handleShowCart("close")}/>:null
               }
  
               {/* ---------------------------------------------------------------------------------- */}
@@ -263,68 +218,7 @@ export default function Header() {
 
           {
              showMenu?
-            <div className="h-96 w-64 p-8 bg-zinc-50 fixed  top-0 z-50	 left-0 font-semibold rounded-r-lg  duration-1000	 out-in-ease">
-            <div className="flex justify-between items-center">
-              <h2 className="text-black">Páginas</h2>
-              <MdClose className="h-7 w-7 text-black cursor-pointer" onClick={()=>handleShowMenu("close")} />
-
-            </div>
-            <nav className="text-black flex flex-col ">
-              <div className="border border-black"></div>
-              <Link
-                className={`${
-                  loc.pathname === "/"
-                    ? "bg-slate-100 text-laranja"
-                    : "text-stone-500"
-                } h-10 items-center rounded-lg p-3 hover:bg-slate-400 hover:text-laranja`}
-                to="/"
-              >
-                {" "}
-                Home
-              </Link>
-              <Link
-                className={`${
-                  loc.pathname === "/produtos"
-                    ? "bg-slate-100 text-laranja"
-                    : "text-stone-500"
-                } h-10 items-center p-3 hover:bg-sky-700`}
-                to="/produtos"
-              >
-                Produtos
-              </Link>
-              <Link
-                className={`${
-                  loc.pathname === "/categorias"
-                    ? "bg-slate-100 text-laranja"
-                    : "text-stone-500"
-                } h-10 items-center p-3`}
-                to="/categorias"
-              >
-                Categorias
-              </Link>
-              <Link
-                className={`${
-                  loc.pathname === "/pedidos"
-                    ? "bg-slate-100 text-laranja"
-                    : "text-stone-500"
-                } h-10 items-center p-3`}
-                to="/pedidos"
-              >
-                Meus Pedidos
-              </Link>
-            </nav>
-            <footer className="flex flex-col mt-20">
-              <div className="border border-black w-full"></div>
-              <div className="my-3 flex justify-around items-center">
-                <Link to="/cadastro/" className="text-stone-500 text-xs">
-                  Cadastre-se
-                </Link>
-                <button className="text-white bg-azul-escuro w-24 h-7 rounded-lg font-medium">
-                  <Link to="/login">Login</Link>
-                </button>
-              </div>
-            </footer>
-          </div>:null
+          <MenuHamburguer/>:null
           }
 
            <img
@@ -347,49 +241,8 @@ export default function Header() {
             </button>
             {
                 showCart?
-                <div className="flex flex-col justify-between h-96 w-64 p-8 bg-zinc-50 fixed right-0 top-0 z-50	 font-semibold rounded-l-lg  duration-1000	 out-in-ease  overflow-auto ">
-                <header>
-                  <div className="flex justify-between items-center">
-                  <h2 className="text-black">Meu Carrinho</h2>
-                  <MdClose className="h-7 w-7 text-black cursor-pointer" onClick={()=>handleShowCart("close")}/>
-                  </div>
-                  <div className="border border-black"></div>
-                </header>
-                <div className="text-black flex flex-col gap-6	justify-around ">
-                {pedidos
-                    .filter((sapato) => sapato.qtd > 0)
-                    .map((pedido) =>
-                    
-                    {
-                      return(
-                      <div key={pedido.product_id}>
-                        <CartCard  p={pedido} />
-                      </div>
-                    )})}
-                </div>
-                <footer className="flex flex-col gap-3">
-                  <div className="border border-black "></div>
-                  <article className="flex justify-between">
-                    <h2 className="text-black">Valor Total:</h2>
-                    {<p className="text-azul-escuro">{somar.toFixed(2)}</p> || 0}
-                  </article>
-                  <div className=" flex font-Inter justify-around items-center ">
-                    <a
-                      onClick={handleCart}
-                      className="cursor-pointer text-stone-500 text-[10px]"
-                    >
-                      Esvaziar
-                    </a>
-                    <button
-                      onClick={handleCompra}
-                      className="bg-azul-escuro text-white rounded-xl h-6 w-32 text-[10px] font-medium"
-                    >
-                      Finalizar Compra
-                    </button>
-                  </div>
-                </footer>
-              </div>:null
-              }
+                <Cart onClose={()=> handleShowCart("close")}/>:null
+               }
 
           </div>
 

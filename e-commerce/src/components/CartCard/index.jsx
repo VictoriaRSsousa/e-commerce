@@ -1,7 +1,6 @@
 
 
-export default function CardPedido(props){
-
+export default function CardCart(props){
     return(
         <main className="md:flex justify-between font-Inter" key={props.p.product_id}>
             

@@ -6,7 +6,7 @@ export const ProdutosContext = createContext([])
 export default function ProdutosProvider({children}){
     const [produtos, setProdutos] = useState([])
 
-    async function handleApi(){
+    async function getAllProducts(){
         const response = await api.getProducts()
         const result = await response.json()
         setProdutos(result)
@@ -14,7 +14,7 @@ export default function ProdutosProvider({children}){
     }
 
     useEffect(()=>{
-        handleApi()
+        getAllProducts()
     },[])
     return(
 

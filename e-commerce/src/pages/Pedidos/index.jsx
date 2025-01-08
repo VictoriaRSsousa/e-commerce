@@ -71,7 +71,7 @@ export default function Pedidos(){
             <Header/>
         
             <main className="">          
-                <div className=" flex flex-col md:flex-row  md:my-20 md:mx-20 items-center md:items-baseline   justify-center md:justify-normal ">          
+                <div className=" flex flex-col md:flex-row  md:my-20 md:mx-20 items-center md:items-baseline   justify-center md:justify-normal min-h-[600px] md:min-h-[700px]	">          
                     <section className="hidden  md:flex flex-col bg-slate-100 rounded-lg py-8  gap-3 w-64 p-8	">
                         <button href="" onClick={handleOpcao} value="pedido" className="focus:text-laranja"> Meus Pedidos</button>
                         <div className="border-t border-stone-500"></div>

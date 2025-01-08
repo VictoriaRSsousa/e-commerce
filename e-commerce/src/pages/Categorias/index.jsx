@@ -21,8 +21,8 @@ export default function Categorias(){
     
         <>
         <Header/>
-        <main  className=" flex justify-center my-14 md:my-20  " >
-            <div className="grid md:grid-cols-4 gap-10">
+        <main  className="min-h-[630px] md:min-h-[700px]	 flex justify-center my-14 md:my-20  " >
+            <div className="grid md:grid-cols-3  gap-10">
                  { categories.map((categoria)=>(<CardCategoria categoria={categoria} key={categoria.categorie_id} />))} 
             </div>
         </main>

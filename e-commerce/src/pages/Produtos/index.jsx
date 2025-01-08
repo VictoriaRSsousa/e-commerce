@@ -35,7 +35,7 @@ export default function Produtos() {
   return (
     <>
       <Header />
-      <main className="flex flex-col md:flex-row mt-5 md:m-20 gap-10   md:gap-20  justify-nromal md:justify-center items-center md:items-stretch	">
+      <main className="flex flex-col md:flex-row mt-5 md:m-20 gap-10   md:gap-20  justify-nromal md:justify-center items-center md:items-stretch min-h-[630px] md:min-h-[700px]	">
         <section className=" hidden md:flex flex-col bg-zinc-50 rounded-lg shadow-lg h-fit w-[251px] text-base	text-stone-500 font-semibold">
 
 

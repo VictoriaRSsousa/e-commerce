@@ -56,7 +56,7 @@ export default function Produto() {
           <section className="">
             <img
               src={produto[0].image}
-              className=" w-[223px] md:w-[309px]	 h-[172px] md:h-[342px]"
+              className=" w-[223px]  lg:max-w-[309px] md:w-[20vw] md:h-[20vw]	 h-[172px]  lg:max-h-[342px] object-cover"
               alt=""
             />
             <span className="text-2xl	hidden md:flex flex-col gap-6	mt-10">
@@ -68,7 +68,7 @@ export default function Produto() {
             <article className="font-medium	text-sm	md:text-2xl text-stone-500	flex flex-col gap-2">
               <h3 className="font-semibold text-azul-escuro text-4xl	">{produto[0].model}</h3>
               <p>{produto[0].categorie}</p>
-              <p className="w-[224px] md:w-[514px] text-wrap ">
+              <p className="w-[224px] md:w-[500px]  text-wrap ">
                 {produto[0].description}
               </p>
             </article>
